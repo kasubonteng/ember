@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { gilroy } from "@/fonts";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          `font-gilroy min-h-screen bg-background antialiased`,
+          gilroy.variable,
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
