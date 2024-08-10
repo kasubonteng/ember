@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { gilroy } from "@/fonts";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +22,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          `font-gilroy min-h-screen bg-background antialiased`,
+          `relative min-h-screen bg-background font-sans antialiased`,
           gilroy.variable,
         )}
       >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
