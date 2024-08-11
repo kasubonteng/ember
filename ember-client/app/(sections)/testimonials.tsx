@@ -55,24 +55,25 @@ const ImageBackgroundReviewCard = ({
 
   return (
     <div className="group relative h-96 w-80 overflow-hidden rounded-xl shadow-xl transition-all duration-500 ease-in-out hover:shadow-2xl">
-      {/* Product Image Background */}
-      <img
-        src={productImage || "/api/placeholder/320/400"}
+      <Image
+        src={productImage}
         alt="Product"
+        width={320}
+        height={320}
         className="absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
       />
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-all duration-500 ease-in-out group-hover:from-black/80"></div>
 
-      {/* Review Content */}
       <div
         className={`absolute bottom-0 left-0 right-0 p-6 text-white transition-all duration-500 ease-in-out ${isExpanded ? "h-full" : "h-2/3"}`}
       >
         <div className="flex items-center space-x-4">
-          <img
-            src={avatar || "/api/placeholder/32/32"}
+          <Image
+            src={avatar}
             alt={`${name}'s avatar`}
+            width={48}
+            height={48}
             className="h-12 w-12 rounded-full border-2 border-white object-cover"
           />
           <div>
@@ -91,7 +92,7 @@ const ImageBackgroundReviewCard = ({
         <p
           className={`mt-4 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? "max-h-96" : "max-h-20"}`}
         >
-          "{review}"
+          &quot;{review}&quot;
         </p>
 
         <button
@@ -123,7 +124,9 @@ const Testimonials = () => {
   return (
     <section className="flex flex-col items-center justify-center gap-10 bg-white py-44">
       <div>
-        <p className="font-semibold uppercase text-primary">Materials</p>
+        <p className="mb-10 text-center font-semibold uppercase text-primary">
+          Testimonials
+        </p>
         <h3 className="max-w-[413px] text-[42px] font-bold capitalize leading-[3rem]">
           Our Client Reviews
         </h3>
