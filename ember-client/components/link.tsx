@@ -11,14 +11,14 @@ const CustomLink = ({
 }) => {
   return (
     <Link href={href}>
-      <span className="group inline-flex items-center font-medium text-primary transition-colors duration-150 hover:text-primary">
+      <span className="group inline-flex items-center font-medium text-primary transition-colors duration-300 hover:text-primary">
         <span className="relative">
           {children}
-          <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-primary transition-all duration-150 ease-out group-hover:w-full"></span>
+          <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-primary transition-all duration-300 ease-out group-hover:w-full"></span>
         </span>
         <span className="relative ml-1 overflow-hidden">
-          <ArrowRight className="h-5 w-0 transform transition-all duration-150 ease-out group-hover:w-5" />
-          <ArrowRight className="absolute left-0 top-0 h-5 w-5 -translate-x-full transform transition-all duration-150 ease-out group-hover:translate-x-0" />
+          <ArrowRight className="h-5 w-0 transform transition-all duration-300 ease-out group-hover:w-5" />
+          <ArrowRight className="absolute left-0 top-0 h-5 w-5 -translate-x-full transform transition-all duration-300 ease-out group-hover:translate-x-0" />
         </span>
       </span>
     </Link>

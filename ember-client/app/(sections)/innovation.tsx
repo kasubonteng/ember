@@ -1,33 +1,90 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
 import CustomLink from "@/components/link";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 
 const Innovation = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.7, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="flex gap-10 bg-white pb-36 pl-0 pr-20 pt-96">
-      <div>
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={containerVariants}
+      className="flex flex-col-reverse items-center justify-between gap-10 bg-gradient-to-b from-white to-gray-100 px-8 py-20 lg:flex-row lg:px-20"
+    >
+      <motion.div variants={imageVariants} className="relative w-full lg:w-1/2">
         <Image
           src="/innovation/innovation-1.png"
           width={629}
           height={445}
           alt="innovation image 1"
-          className="col-span-1 row-span-1"
+          className="rounded-lg shadow-xl"
         />
-      </div>
-      <div className="ml-20 flex max-w-[556px] flex-col gap-8">
-        <p className="font-semibold uppercase text-primary">Innovation</p>
-        <h3 className="max-w-[413px] text-[42px] font-bold capitalize leading-[3rem]">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          viewport={{ once: true }}
+          className="absolute -bottom-10 -left-10 hidden h-40 w-40 rounded-full bg-primary lg:block"
+        />
+      </motion.div>
+      <motion.div
+        variants={itemVariants}
+        className="flex max-w-[556px] flex-col gap-8"
+      >
+        <motion.p
+          variants={itemVariants}
+          className="font-semibold uppercase text-primary"
+        >
+          Innovation
+        </motion.p>
+        <motion.h3
+          variants={itemVariants}
+          className="max-w-[413px] text-4xl font-bold capitalize leading-tight lg:text-5xl"
+        >
           Innovative Designs for Modern Living
-        </h3>
-        <p className="">
+        </motion.h3>
+        <motion.p variants={itemVariants} className="text-gray-600">
           We stay ahead of the curve. Our furniture combines cutting-edge design
           with functional elegance, ensuring your home is both stylish and
-          practical
-        </p>
-        <CustomLink href="/about">More info</CustomLink>
-      </div>
-    </section>
+          practical.
+        </motion.p>
+        <motion.div variants={itemVariants}>
+          <CustomLink href="/about">More info</CustomLink>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

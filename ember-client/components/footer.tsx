@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -63,10 +66,30 @@ const socials = [
 ];
 
 const Footer = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1 } },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
   return (
-    <footer className="flex flex-col gap-32 p-36 pb-12">
-      <div className="flex justify-between">
-        <div className="max-w-[300px] space-y-4">
+    <footer className="flex flex-col gap-32 px-8 pb-12 pt-12 lg:px-36 lg:pt-36">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        // viewport={{ once: true }}
+        className="flex flex-col justify-between gap-10 lg:flex-row lg:gap-0"
+      >
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={textVariants}
+          className="max-w-[300px] space-y-4"
+        >
           <Link
             href={"/"}
             className="text-5xl font-bold transition-colors duration-150 hover:text-primary"
@@ -77,9 +100,14 @@ const Footer = () => {
             The advantage of hiring a workspace with us is that gives you
             comfortable service and all-around facilities.
           </p>
-        </div>
-        <div className="mr-24 grid grid-cols-3 gap-14">
-          <div className="flex flex-col gap-4">
+        </motion.div>
+        <div className="grid grid-cols-3 gap-14 lg:mr-24">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={textVariants}
+            className="flex flex-col gap-4"
+          >
             <p className="font-medium text-primary">Services</p>
             {services.map((service, index) => {
               return (
@@ -92,8 +120,13 @@ const Footer = () => {
                 </Link>
               );
             })}
-          </div>
-          <div className="flex flex-col gap-4">
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={textVariants}
+            className="flex flex-col gap-4"
+          >
             <p className="font-medium text-primary">Furniture</p>
             {furniture.map((furniture, index) => {
               return (
@@ -106,8 +139,13 @@ const Footer = () => {
                 </Link>
               );
             })}
-          </div>
-          <div className="flex flex-col gap-4">
+          </motion.div>
+          <motion.div
+            className="flex flex-col gap-4"
+            initial="hidden"
+            whileInView="visible"
+            variants={textVariants}
+          >
             <p className="font-medium text-primary">Follow Us</p>
             {socials.map((social, index) => {
               return (
@@ -120,16 +158,23 @@ const Footer = () => {
                 </Link>
               );
             })}
-          </div>
+          </motion.div>
         </div>
-      </div>
-      <div className="mr-24 flex items-center justify-between">
-        <span>Copyright &copy; {new Date().getFullYear()}</span>
-        <div className="flex gap-5 font-medium">
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        className="flex flex-col items-center justify-between lg:mr-24 lg:flex-row"
+      >
+        <span className="order-2 lg:order-1">
+          Copyright &copy; {new Date().getFullYear()}
+        </span>
+        <div className="order-1 flex gap-5 font-medium lg:order-2">
           <Link href={"/"}>Terms & Conditions</Link>
           <Link href={"/"}>Privacy Policy</Link>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };

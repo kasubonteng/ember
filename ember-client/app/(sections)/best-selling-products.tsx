@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight, PlusIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface Product {
   id: string;
@@ -167,22 +167,33 @@ const ProductCard = ({
   product: Product;
 }) => {
   return (
-    <div className="group w-[270px] rounded-xl shadow-lg hover:cursor-pointer">
-      <div className="flex w-full items-center justify-center">
-        <Image
-          src={image}
-          alt={name}
-          width={240}
-          height={280}
-          className="h-[300px] transition-transform duration-300 group-hover:scale-110"
-        />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="group mx-auto w-full max-w-[270px] rounded-xl shadow-lg hover:cursor-pointer"
+    >
+      <div className="flex w-full items-center justify-center overflow-hidden">
+        <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+          <Image
+            src={image}
+            alt={name}
+            width={240}
+            height={280}
+            className="h-[300px] w-full object-cover"
+          />
+        </motion.div>
       </div>
-      <div className="flex flex-col gap-8 rounded-b-xl bg-white px-6 py-4 transition-colors group-hover:text-primary">
+      <motion.div
+        whileHover={{ backgroundColor: "#f0f0f0" }}
+        className="flex flex-col gap-4 rounded-b-xl bg-white px-4 py-3 transition-colors group-hover:text-primary sm:gap-8 sm:px-6 sm:py-4"
+      >
         <div className="flex flex-col">
-          <p className="text-sm capitalize text-gray-400 group-hover:text-primary">
+          <p className="text-xs capitalize text-gray-400 group-hover:text-primary sm:text-sm">
             {category}
           </p>
-          <p className="text-xl font-bold">{name}</p>
+          <p className="text-lg font-bold sm:text-xl">{name}</p>
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -190,26 +201,26 @@ const ProductCard = ({
                   key={star}
                   fill={star <= rating ? "#FFD700" : "none"}
                   className={cn(
-                    "h-4 w-4",
+                    "h-3 w-3 sm:h-4 sm:w-4",
                     star <= rating ? "text-[#FFD700]" : "text-gray-400",
                   )}
                 />
               ))}
             </div>
-            <p className="text-gray-400">({rating})</p>
+            <p className="text-xs text-gray-400 sm:text-sm">({rating})</p>
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <p className="font-bold">Ghc{price}</p>
+          <p className="text-sm font-bold sm:text-base">Ghc{price}</p>
           <Button
             size={"icon"}
-            className="rounded-full bg-black transition-transform duration-150 hover:rotate-[90deg]"
+            className="h-8 w-8 rounded-full bg-black transition-transform duration-150 hover:rotate-[90deg] sm:h-10 sm:w-10"
           >
-            <PlusIcon />
+            <PlusIcon className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
@@ -232,38 +243,65 @@ const BestSellingProducts = () => {
   };
 
   return (
-    <section className="flex flex-col items-center gap-10 py-24">
-      <h3 className="text-5xl font-bold">Best Selling Product</h3>
+    <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="flex flex-col items-center gap-6 px-4 py-12 sm:gap-10 sm:px-6 sm:py-24"
+    >
+      <motion.h3
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="text-center text-3xl font-bold sm:text-5xl"
+      >
+        Best Selling Product
+      </motion.h3>
       <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <div className="relative max-w-[1200px]">
+      <div className="relative w-full max-w-[1200px]">
         <Button
           size="icon"
-          className="absolute -left-6 top-1/2 -translate-y-1/2 transform rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black"
+          className="absolute -left-2 top-1/2 z-10 hidden -translate-y-1/2 transform rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black sm:-left-6 lg:block"
           onClick={() =>
             setActiveTab(activeTab === 0 ? tabs.length - 1 : activeTab - 1)
           }
         >
-          <ArrowLeft />
+          <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
         <Button
           size="icon"
-          className="absolute -right-6 top-1/2 -translate-y-1/2 transform rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black"
+          className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 transform rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black sm:-right-6 lg:block"
           onClick={() =>
             setActiveTab(activeTab === tabs.length - 1 ? 0 : activeTab + 1)
           }
         >
-          <ArrowRight />
+          <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
-        <div className="mx-auto grid w-full grid-cols-4 content-center items-center gap-10 justify-self-center">
-          {getProductsForActiveTab().map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.4 }}
+            className="mx-auto grid w-full grid-cols-1 content-center items-center gap-6 justify-self-center sm:grid-cols-2 sm:gap-10 lg:grid-cols-4"
+          >
+            {getProductsForActiveTab().map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      <CustomLink href="/products">View All Products</CustomLink>
-    </section>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        <CustomLink href="/products">View All Products</CustomLink>
+      </motion.div>
+    </motion.section>
   );
 };
 
@@ -296,23 +334,33 @@ const TabSwitcher = ({
   setActiveTab: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
-    <div className="space-x-4 rounded-full bg-gray-200 p-2">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+      className="flex flex-wrap justify-center space-x-2 rounded-full bg-gray-200 p-2 sm:space-x-4"
+    >
       {tabs.map((tab, index) => {
         return (
-          <Button
+          <motion.div
             key={index}
-            className={cn(
-              "rounded-full bg-transparent px-4 py-2 text-lg font-medium text-black hover:text-white",
-              tab.value === activeTab
-                ? "bg-white"
-                : "bg-transparent text-black",
-            )}
-            onClick={() => setActiveTab(tab.value)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {tab.name}
-          </Button>
+            <Button
+              className={cn(
+                "rounded-full bg-transparent px-3 py-1 text-sm font-medium text-black hover:text-white sm:px-4 sm:py-2 sm:text-lg",
+                tab.value === activeTab
+                  ? "bg-white"
+                  : "bg-transparent text-black",
+              )}
+              onClick={() => setActiveTab(tab.value)}
+            >
+              {tab.name}
+            </Button>
+          </motion.div>
         );
       })}
-    </div>
+    </motion.div>
   );
 };
