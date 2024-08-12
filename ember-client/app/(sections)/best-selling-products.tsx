@@ -262,7 +262,7 @@ const BestSellingProducts = () => {
       <div className="relative w-full max-w-[1200px]">
         <Button
           size="icon"
-          className="absolute -left-2 top-1/2 z-10 hidden -translate-y-1/2 transform rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black sm:-left-6 lg:block"
+          className="absolute -left-2 top-1/2 z-10 hidden -translate-y-1/2 transform items-center justify-center rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black sm:-left-6 lg:flex"
           onClick={() =>
             setActiveTab(activeTab === 0 ? tabs.length - 1 : activeTab - 1)
           }
@@ -271,7 +271,7 @@ const BestSellingProducts = () => {
         </Button>
         <Button
           size="icon"
-          className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 transform rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black sm:-right-6 lg:block"
+          className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 transform items-center justify-center rounded-full bg-white text-black shadow-lg hover:bg-gray-100 hover:text-black sm:-right-6 lg:flex"
           onClick={() =>
             setActiveTab(activeTab === tabs.length - 1 ? 0 : activeTab + 1)
           }

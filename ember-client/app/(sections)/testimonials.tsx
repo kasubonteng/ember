@@ -166,6 +166,7 @@ const Testimonials = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
+      viewport={{ once: false, amount: 0.3 }}
       className="flex flex-col items-center justify-center gap-6 bg-white px-4 py-16 sm:gap-10 sm:px-6 sm:py-24 md:py-44"
     >
       <motion.div
@@ -227,8 +228,8 @@ const Testimonials = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden lg:block" />
+          <CarouselNext className="hidden lg:block" />
         </Carousel>
       </motion.div>
     </motion.section>
