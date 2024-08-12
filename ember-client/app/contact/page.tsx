@@ -116,13 +116,13 @@ const ContactInfo = ({
 
 const ContactPage = () => {
   return (
-    <section className="mx-auto flex min-h-[70vh] max-w-screen-2xl flex-col items-center justify-center p-4 md:flex-row">
+    <section className="mx-auto flex min-h-screen max-w-screen-2xl flex-col items-center justify-center p-4 md:flex-row">
       <div className="flex h-full w-full flex-col items-start justify-center md:flex-row">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-8 border-black px-2 py-8 lg:px-8"
+          className="space-y-8 border-black px-2 pt-8 lg:px-8"
         >
           <h2 className="text-4xl font-bold">Contact Us</h2>
           <div className="space-y-6">
