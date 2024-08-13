@@ -115,7 +115,7 @@ const FurniturePage = () => {
         </p>
       </motion.div>
       <section className="flex w-full items-center justify-center">
-        <div className="flex w-full max-w-screen-xl flex-col gap-10">
+        <div className="flex w-full max-w-screen-2xl flex-col gap-10">
           {furnitureItems.map((item, index) => (
             <Card key={item.title} {...item} />
           ))}

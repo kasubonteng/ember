@@ -79,7 +79,7 @@ const Personalization = () => {
               width={200}
               height={300}
               alt="personalization image 1"
-              className="rounded-lg shadow-lg"
+              className="h-[300px] w-[200px] rounded-lg shadow-lg"
             />
           </motion.div>
           <motion.div
@@ -91,7 +91,7 @@ const Personalization = () => {
               width={400}
               height={300}
               alt="personalization image 3"
-              className="rounded-lg shadow-lg"
+              className="h-[300px] w-[400px] rounded-lg shadow-lg"
             />
           </motion.div>
           <motion.div
@@ -103,7 +103,7 @@ const Personalization = () => {
               width={200}
               height={280}
               alt="personalization image 2"
-              className="rounded-lg shadow-lg"
+              className="h-[280px] w-[200px] rounded-lg shadow-lg"
             />
           </motion.div>
         </motion.div>

@@ -78,7 +78,7 @@ const Craftsmanship = () => {
             width={629}
             height={445}
             alt="craftsmanship image"
-            className="rounded-lg shadow-xl"
+            className="h-[445px] w-[629px] rounded-lg shadow-xl"
           />
           <motion.div
             initial={{ opacity: 0, x: 20 }}
