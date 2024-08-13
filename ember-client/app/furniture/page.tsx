@@ -37,7 +37,8 @@ const Card = ({ title, description, image, imagePosition }: CardProps) => {
             width={629}
             height={445}
             alt={`${title} image`}
-            className="rounded-xl shadow-lg"
+            priority
+            className="h-[445px] w-[629px] rounded-xl shadow-lg"
           />
         </motion.div>
       </Link>

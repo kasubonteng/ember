@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductCardSmallProps {
   product: {
@@ -23,7 +24,7 @@ const ProductCardSmall: React.FC<ProductCardSmallProps> = ({
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400 }}
     >
-      <a
+      <Link
         href={`/shop/products/${product.category}/${product.title.toLowerCase().replace(" ", "-")}`}
         className="group flex w-64 flex-col gap-2"
       >
@@ -42,7 +43,7 @@ const ProductCardSmall: React.FC<ProductCardSmallProps> = ({
         <p className="font-medium text-primary group-hover:font-bold">
           Ghc{product.price.toLocaleString()}
         </p>
-      </a>
+      </Link>
     </motion.div>
   );
 };
