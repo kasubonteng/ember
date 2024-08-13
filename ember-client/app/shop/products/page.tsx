@@ -4,6 +4,7 @@ import ProductCard from "@/components/product-card-large";
 import Filter from "./_components/filter";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const products = [
   {
@@ -211,7 +212,14 @@ const ShopPage = () => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center px-4 pt-36 lg:px-8 lg:pt-44">
-      <h1 className="mb-6 text-3xl font-bold">Shop Our Collection</h1>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-16 space-y-4 text-center"
+      >
+        <h2 className="mb-6 text-4xl font-bold">Shop Our Collection</h2>
+      </motion.div>
 
       <div className="w-full max-w-[1096px]">
         <Filter />
