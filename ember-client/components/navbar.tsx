@@ -85,13 +85,17 @@ const Navbar = () => {
               href={link.href}
               className={cn(
                 "group relative text-lg font-bold transition-colors duration-300 hover:text-primary",
-                pathname === link.href && "text-primary",
+                pathname.includes(link.href) && "text-primary",
               )}
             >
               {link.name}
               <motion.span
-                initial={{ width: pathname === link.href ? "100%" : "0%" }}
-                animate={{ width: pathname === link.href ? "100%" : "0%" }}
+                initial={{
+                  width: pathname.includes(link.href) ? "100%" : "0%",
+                }}
+                animate={{
+                  width: pathname.includes(link.href) ? "100%" : "0%",
+                }}
                 whileHover={{ width: "100%" }}
                 transition={{ duration: 0.3 }}
                 className="absolute bottom-0 left-0 h-[2px] bg-primary"
