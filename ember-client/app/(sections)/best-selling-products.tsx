@@ -299,7 +299,7 @@ const BestSellingProducts = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <CustomLink href="/products">View All Products</CustomLink>
+        <CustomLink href="/shop">View All Products</CustomLink>
       </motion.div>
     </motion.section>
   );

@@ -221,7 +221,9 @@ const ShopPage = () => {
         className="mb-16 flex w-full max-w-[1096px] flex-col-reverse items-center space-y-4 text-center sm:flex-row"
       >
         <div className="w-[150px]">
-          <CustomLink href="/shop">Back to Shop</CustomLink>
+          <CustomLink href="/shop" variant="back">
+            Back to Shop
+          </CustomLink>
         </div>
         <h2 className="mb-6 w-full text-center text-4xl font-bold sm:pr-[100px]">
           Shop Our Collection
