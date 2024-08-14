@@ -160,7 +160,7 @@ const Filter = () => {
   return (
     <div className="mb-8 w-full">
       <motion.div
-        className="mb-4 flex items-center justify-start"
+        className="mb-4 flex flex-col items-start justify-start sm:flex-row sm:items-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

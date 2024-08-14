@@ -5,6 +5,8 @@ import Filter from "./_components/filter";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import CustomLink from "@/components/link";
+import Link from "next/link";
 
 const products = [
   {
@@ -216,9 +218,14 @@ const ShopPage = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-16 space-y-4 text-center"
+        className="mb-16 flex w-full max-w-[1096px] flex-col-reverse items-center space-y-4 text-center sm:flex-row"
       >
-        <h2 className="mb-6 text-4xl font-bold">Shop Our Collection</h2>
+        <div className="w-[150px]">
+          <CustomLink href="/shop">Back to Shop</CustomLink>
+        </div>
+        <h2 className="mb-6 w-full text-center text-4xl font-bold sm:pr-[100px]">
+          Shop Our Collection
+        </h2>
       </motion.div>
 
       <div className="w-full max-w-[1096px]">

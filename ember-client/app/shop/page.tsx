@@ -206,9 +206,7 @@ const ShopPage = () => {
           available at your fingertips.
         </p>
         <div>
-          <CustomLink href="/shop/products?category=all">
-            View All Products
-          </CustomLink>
+          <CustomLink href="/shop/products">View All Products</CustomLink>
         </div>
       </motion.div>
 
@@ -216,6 +214,10 @@ const ShopPage = () => {
         {categories.map((category) => (
           <Category key={category.title} {...category} />
         ))}
+      </div>
+
+      <div>
+        <CustomLink href="/shop/products">View All Products</CustomLink>
       </div>
     </section>
   );
