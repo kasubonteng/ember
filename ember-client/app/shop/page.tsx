@@ -164,7 +164,7 @@ const Category = ({ title, description, products }: CategoryProps) => {
     >
       <motion.div className="flex flex-col gap-2">
         <Link
-          href={`/shop/products?category=${title.toLowerCase().replace(" ", "-")}`}
+          href={`/shop/products?category=${title.toLowerCase().replace(" ", "+")}`}
           className="flex w-fit items-center gap-2 text-3xl font-bold duration-300 hover:text-primary"
         >
           <span className="group flex items-center gap-2">
