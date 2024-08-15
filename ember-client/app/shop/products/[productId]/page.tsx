@@ -101,6 +101,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
                   alt={product.name}
                   width={700}
                   height={500}
+                  priority
                   className="h-[500px] w-full rounded-xl object-cover shadow-lg"
                 />
               </motion.div>
