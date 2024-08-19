@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
@@ -33,7 +33,11 @@ const values = [
 ];
 
 const AboutPage = () => {
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState<{
+    title: string;
+    description: string;
+    icon: string;
+  } | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -155,7 +159,17 @@ const OurStorySection = () => {
   );
 };
 
-const ValuesSection = ({ values, selectedValue, setSelectedValue }) => {
+const ValuesSection = ({
+  values,
+  selectedValue,
+  setSelectedValue,
+}: {
+  values: { title: string; description: string; icon: string }[];
+  selectedValue: { title: string; description: string; icon: string } | null;
+  setSelectedValue: Dispatch<
+    SetStateAction<{ title: string; description: string; icon: string } | null>
+  >;
+}) => {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
