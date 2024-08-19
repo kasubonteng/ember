@@ -14,10 +14,11 @@ public class Product
     public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
     public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
-    private double? _averageRating;
     public double? AverageRating
     {
-        get => _averageRating ?? (Ratings.Any() ? Ratings.Average(r => r.Value) : (double?)null);
-        set => _averageRating = value;
+        get
+        {
+            return Ratings.Any() ? Ratings.Average(r => r.Value) : (double?)null;
+        }
     }
 }
