@@ -13,11 +13,21 @@ public class ProductService : IProductService
         _productRepository = productRepository;
     }
 
-    public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+    public async Task<(IEnumerable<ProductDto>, int?)> GetAllProductsAsync(ProductQueryParams queryParams)
     {
-        var products = await _productRepository.GetAllProductsAsync();
+        var products = await _productRepository.GetAllProductsAsync(queryParams);
+        
+        var totalNumberOfPages = 0;
 
-        return products.Select(MapToDto);
+        if (queryParams.PageSize != null && queryParams.Page != null)
+        {
+            var totalNumberOfProducts = await _productRepository.GetTotalNumberOfProductsAsync();
+        
+            totalNumberOfPages = (int)Math.Ceiling(totalNumberOfProducts / (double)queryParams.PageSize);
+        }
+
+
+        return (products.Select(MapToDto), totalNumberOfPages);
     }
 
     public async Task<ProductDto?> GetProductByIdAsync(int id)

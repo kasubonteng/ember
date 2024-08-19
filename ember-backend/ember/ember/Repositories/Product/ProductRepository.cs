@@ -16,17 +16,63 @@ public class ProductRepository : IProductRepository
     }
 
 
-    public async Task<IEnumerable<Models.Product>> GetAllProductsAsync()
+    public async Task<IEnumerable<Models.Product>> GetAllProductsAsync(ProductQueryParams queryParams)
     {
         try
         {
-            var products = await _context.Products
+            var query =  _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Ratings)
-                .ToListAsync();
+                .AsQueryable();
 
-            return products;
+            if (queryParams.Category != null)
+            {
+                query = query.Where(p => p.Category.Name.ToLower() == queryParams.Category.ToLower());
+            }
+            
+            if (queryParams.Search != null)
+            {
+                query = query.Where(p => p.Name.ToLower().Contains(queryParams.Search.ToLower()));
+            }
+            
+            if (queryParams.Rating != null)
+            {
+                query = query.Where(p => p.Ratings.Average(r => r.Value) >= queryParams.Rating);
+            }
+            
+            if (queryParams.MinPrice != null)
+            {
+                query = query.Where(p => p.Price >= queryParams.MinPrice);
+            }
+            
+            if (queryParams.MaxPrice != null)
+            {
+                query = query.Where(p => p.Price <= queryParams.MaxPrice);
+            }
+            
+            if (queryParams.Sort != null)
+            {
+                var sortOption = queryParams.Sort.ToLower();
+                query = sortOption switch
+                {
+                    "name" => query.OrderBy(p => p.Name),
+                    "name_desc" => query.OrderByDescending(p => p.Name),
+                    "price" => query.OrderBy(p => p.Price),
+                    "price_desc" => query.OrderByDescending(p => p.Price),
+                    "rating" => query.OrderByDescending(p => p.AverageRating),
+                    "rating_desc" => query.OrderBy(p => p.AverageRating),
+                    _ => query,
+                };
+            }
+            
+            if (queryParams.Page.HasValue && queryParams.PageSize.HasValue)
+            {
+                query = query.Skip((queryParams.Page.Value - 1) * queryParams.PageSize.Value)
+                    .Take(queryParams.PageSize.Value);
+            }
+
+            return await query.ToListAsync();
         }
         catch (Exception e)
         {
@@ -75,6 +121,11 @@ public class ProductRepository : IProductRepository
             _logger.LogError(e, "Error while getting products by category");
             throw;
         }
+    }
+
+    public async Task<int> GetTotalNumberOfProductsAsync()
+    {
+        return await _context.Products.CountAsync();
     }
 
     private static ProductDto MapToDto(Models.Product product)
