@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ember.Data;
@@ -11,9 +12,11 @@ using ember.Data;
 namespace ember.Migrations
 {
     [DbContext(typeof(EmberContext))]
-    partial class EmberContextModelSnapshot : ModelSnapshot
+    [Migration("20240815180816_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace ember.Migrations
                             Id = 1,
                             CustomerEmail = "john.doe@example.com",
                             CustomerName = "John Doe",
-                            OrderDate = new DateTime(2024, 8, 9, 11, 15, 35, 759, DateTimeKind.Utc).AddTicks(6850),
+                            OrderDate = new DateTime(2024, 8, 5, 18, 8, 16, 266, DateTimeKind.Utc).AddTicks(1690),
                             TotalAmount = 1399.98m
                         },
                         new
@@ -106,7 +109,7 @@ namespace ember.Migrations
                             Id = 2,
                             CustomerEmail = "jane.smith@example.com",
                             CustomerName = "Jane Smith",
-                            OrderDate = new DateTime(2024, 8, 14, 11, 15, 35, 759, DateTimeKind.Utc).AddTicks(6860),
+                            OrderDate = new DateTime(2024, 8, 10, 18, 8, 16, 266, DateTimeKind.Utc).AddTicks(1710),
                             TotalAmount = 1099.98m
                         });
                 });
@@ -182,13 +185,14 @@ namespace ember.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<double?>("AverageRating")
-                        .HasColumnType("double precision");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -217,7 +221,8 @@ namespace ember.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            Description = "A luxurious sofa crafted with premium materials, offering unparalleled comfort and timeless elegance for your living space.",
+                            Description = "",
+                            Image = "",
                             Name = "Sofa",
                             Price = 799m,
                             SKU = "SOFA-003",
@@ -227,7 +232,8 @@ namespace ember.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            Description = "An exquisitely designed armchair, blending sophistication and relaxation in perfect harmony",
+                            Description = "",
+                            Image = "",
                             Name = "Armchair",
                             Price = 399m,
                             SKU = "ARM-CHA-001",
@@ -237,7 +243,8 @@ namespace ember.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            Description = "A chic and modern coffee table, the epitome of refined simplicity, perfect for elevating your living room décor.",
+                            Description = "",
+                            Image = "",
                             Name = "Coffee Table",
                             Price = 199m,
                             SKU = "COF-TAB-006",
@@ -247,7 +254,8 @@ namespace ember.Migrations
                         {
                             Id = 4,
                             CategoryId = 1,
-                            Description = "A stunning dining table crafted from the finest materials, designed to be the centerpiece of your dining experience.",
+                            Description = "",
+                            Image = "",
                             Name = "Dining Table",
                             Price = 599m,
                             SKU = "DIN-TAB-001",
@@ -257,7 +265,8 @@ namespace ember.Migrations
                         {
                             Id = 5,
                             CategoryId = 1,
-                            Description = "A sleek and modern bookshelf, perfect for showcasing your most prized possessions in style.",
+                            Description = "",
+                            Image = "",
                             Name = "Bookshelf",
                             Price = 349m,
                             SKU = "BKS-003",
@@ -267,7 +276,8 @@ namespace ember.Migrations
                         {
                             Id = 6,
                             CategoryId = 1,
-                            Description = "An elegant floor lamp that brings a warm, inviting glow to any room, blending form and function flawlessly.",
+                            Description = "",
+                            Image = "",
                             Name = "Floor Lamp",
                             Price = 129m,
                             SKU = "FLR-121",
@@ -277,7 +287,8 @@ namespace ember.Migrations
                         {
                             Id = 7,
                             CategoryId = 2,
-                            Description = "A grand sectional sofa that combines luxurious comfort with a contemporary design, perfect for family gatherings.",
+                            Description = "",
+                            Image = "",
                             Name = "Sectional Sofa",
                             Price = 1299m,
                             SKU = "SOF-001",
@@ -287,7 +298,8 @@ namespace ember.Migrations
                         {
                             Id = 8,
                             CategoryId = 2,
-                            Description = "A sleek and modern TV stand, designed to complement your entertainment space with elegance and style.",
+                            Description = "",
+                            Image = "",
                             Name = "TV Stand",
                             Price = 249m,
                             SKU = "TVS-011",
@@ -297,7 +309,8 @@ namespace ember.Migrations
                         {
                             Id = 9,
                             CategoryId = 2,
-                            Description = "A minimalist side table, offering both style and practicality, perfect for any modern living room.",
+                            Description = "",
+                            Image = "",
                             Name = "Side Table",
                             Price = 99m,
                             SKU = "SDT-101",
@@ -307,7 +320,8 @@ namespace ember.Migrations
                         {
                             Id = 10,
                             CategoryId = 2,
-                            Description = "A versatile ottoman, beautifully upholstered to enhance your living space with comfort and elegance.",
+                            Description = "",
+                            Image = "",
                             Name = "Ottoman",
                             Price = 149m,
                             SKU = "OTT-001",
@@ -317,7 +331,8 @@ namespace ember.Migrations
                         {
                             Id = 11,
                             CategoryId = 2,
-                            Description = "Exclusive wall art that adds a touch of sophistication and personality to your home.",
+                            Description = "",
+                            Image = "",
                             Name = "Wall Art",
                             Price = 79m,
                             SKU = "ART-021",
@@ -327,7 +342,8 @@ namespace ember.Migrations
                         {
                             Id = 12,
                             CategoryId = 2,
-                            Description = "A luxurious area rug, exquisitely crafted to provide comfort and style to your living space.",
+                            Description = "",
+                            Image = "",
                             Name = "Area Rug",
                             Price = 199m,
                             SKU = "RUG-001",
@@ -337,7 +353,8 @@ namespace ember.Migrations
                         {
                             Id = 13,
                             CategoryId = 3,
-                            Description = "An elegant bed frame, meticulously crafted to provide a stylish and sturdy foundation for your bedroom retreat.",
+                            Description = "",
+                            Image = "",
                             Name = "Bed Frame",
                             Price = 599m,
                             SKU = "BED-001",
@@ -347,7 +364,8 @@ namespace ember.Migrations
                         {
                             Id = 14,
                             CategoryId = 3,
-                            Description = "A refined nightstand, offering both functionality and a touch of luxury to your bedroom decor.",
+                            Description = "",
+                            Image = "",
                             Name = "Nightstand",
                             Price = 129m,
                             SKU = "NST-001",
@@ -357,7 +375,8 @@ namespace ember.Migrations
                         {
                             Id = 15,
                             CategoryId = 3,
-                            Description = "A sophisticated dresser, providing ample storage space while adding a timeless elegance to your bedroom.",
+                            Description = "",
+                            Image = "",
                             Name = "Dresser",
                             Price = 449m,
                             SKU = "DRS-001",
@@ -367,7 +386,8 @@ namespace ember.Migrations
                         {
                             Id = 16,
                             CategoryId = 3,
-                            Description = "A luxurious wardrobe, designed to elegantly store your clothing and accessories with style and grace.",
+                            Description = "",
+                            Image = "",
                             Name = "Wardrobe",
                             Price = 699m,
                             SKU = "WAD-001",
@@ -377,7 +397,8 @@ namespace ember.Migrations
                         {
                             Id = 17,
                             CategoryId = 3,
-                            Description = "A chic vanity that combines beauty with practicality, perfect for creating a glamorous personal space.",
+                            Description = "",
+                            Image = "",
                             Name = "Vanity",
                             Price = 299m,
                             SKU = "VAN-001",
@@ -387,7 +408,8 @@ namespace ember.Migrations
                         {
                             Id = 18,
                             CategoryId = 3,
-                            Description = "A stylish bedside lamp that provides a warm and inviting ambiance to your bedroom retreat.",
+                            Description = "",
+                            Image = "",
                             Name = "Bedside Lamp",
                             Price = 59m,
                             SKU = "BDL-001",
@@ -397,7 +419,8 @@ namespace ember.Migrations
                         {
                             Id = 19,
                             CategoryId = 4,
-                            Description = "A beautifully crafted dining chair, combining comfort with a touch of elegance for your dining experience.",
+                            Description = "",
+                            Image = "",
                             Name = "Dining Chair",
                             Price = 99m,
                             SKU = "DIN-CHA-001",
@@ -407,7 +430,8 @@ namespace ember.Migrations
                         {
                             Id = 20,
                             CategoryId = 4,
-                            Description = "A sleek bar stool, perfect for creating a stylish and comfortable seating arrangement in your home.",
+                            Description = "",
+                            Image = "",
                             Name = "Bar Stool",
                             Price = 79m,
                             SKU = "BAR-STL-001",
@@ -417,7 +441,8 @@ namespace ember.Migrations
                         {
                             Id = 21,
                             CategoryId = 4,
-                            Description = "A luxurious buffet, offering ample storage and a touch of sophistication to your dining space.",
+                            Description = "",
+                            Image = "",
                             Name = "Buffet",
                             Price = 399m,
                             SKU = "BUF-001",
@@ -427,7 +452,8 @@ namespace ember.Migrations
                         {
                             Id = 22,
                             CategoryId = 4,
-                            Description = "An exquisite china cabinet, crafted to elegantly display your finest dinnerware with timeless beauty.",
+                            Description = "",
+                            Image = "",
                             Name = "China Cabinet",
                             Price = 599m,
                             SKU = "CHI-CAB-001",
@@ -437,7 +463,8 @@ namespace ember.Migrations
                         {
                             Id = 23,
                             CategoryId = 4,
-                            Description = "A modern dining bench, designed to offer both comfort and style for your dining experience.",
+                            Description = "",
+                            Image = "",
                             Name = "Dining Bench",
                             Price = 129m,
                             SKU = "DIN-BCH-001",
@@ -447,7 +474,8 @@ namespace ember.Migrations
                         {
                             Id = 24,
                             CategoryId = 4,
-                            Description = "A stunning dining table crafted from the finest materials, designed to be the centerpiece of your dining experience.",
+                            Description = "",
+                            Image = "",
                             Name = "Dining Table",
                             Price = 599m,
                             SKU = "DIN-TAB-001",
@@ -457,7 +485,8 @@ namespace ember.Migrations
                         {
                             Id = 25,
                             CategoryId = 5,
-                            Description = "A sleek and modern desk, designed to provide a stylish and functional workspace for your home office.",
+                            Description = "",
+                            Image = "",
                             Name = "Desk",
                             Price = 299m,
                             SKU = "DSK-001",
@@ -467,7 +496,8 @@ namespace ember.Migrations
                         {
                             Id = 26,
                             CategoryId = 5,
-                            Description = "A comfortable and ergonomic office chair, designed to provide support and style for your workday.",
+                            Description = "",
+                            Image = "",
                             Name = "Office Chair",
                             Price = 199m,
                             SKU = "OFC-CHA-001",
@@ -477,7 +507,8 @@ namespace ember.Migrations
                         {
                             Id = 27,
                             CategoryId = 5,
-                            Description = "A sleek and modern bookshelf, perfect for showcasing your most prized possessions in style.",
+                            Description = "",
+                            Image = "",
                             Name = "Bookshelf",
                             Price = 349m,
                             SKU = "BKS-001",
@@ -487,7 +518,8 @@ namespace ember.Migrations
                         {
                             Id = 28,
                             CategoryId = 5,
-                            Description = "A stylish file cabinet, designed to keep your documents organized and easily accessible.",
+                            Description = "",
+                            Image = "",
                             Name = "File Cabinet",
                             Price = 149m,
                             SKU = "FIL-CAB-001",
@@ -497,7 +529,8 @@ namespace ember.Migrations
                         {
                             Id = 29,
                             CategoryId = 5,
-                            Description = "A modern desk lamp that provides focused task lighting, perfect for your home office or workspace.",
+                            Description = "",
+                            Image = "",
                             Name = "Desk Lamp",
                             Price = 59m,
                             SKU = "DSK-LMP-001",
@@ -507,7 +540,8 @@ namespace ember.Migrations
                         {
                             Id = 30,
                             CategoryId = 5,
-                            Description = "Stylish and functional office accessories, designed to enhance your workspace with a touch of elegance.",
+                            Description = "",
+                            Image = "",
                             Name = "Office Accessories",
                             Price = 29m,
                             SKU = "OFC-ACC-001",
@@ -528,6 +562,7 @@ namespace ember.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ProductId")
@@ -543,210 +578,210 @@ namespace ember.Migrations
                         new
                         {
                             Id = 1,
-                            AltText = "Luxurious modern sofa in a stylish living room.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/sofa.jpg",
                             ProductId = 1
                         },
                         new
                         {
                             Id = 2,
-                            AltText = "Elegant armchair with sophisticated design.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/armchair.jpg",
                             ProductId = 2
                         },
                         new
                         {
                             Id = 3,
-                            AltText = "Chic and modern coffee table in a minimalist setting.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/coffee-table.jpg",
                             ProductId = 3
                         },
                         new
                         {
                             Id = 4,
-                            AltText = "Stylish dining table set for a cozy meal.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-table.jpg",
                             ProductId = 4
                         },
                         new
                         {
                             Id = 5,
-                            AltText = "Modern bookshelf showcasing a collection of books.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bookshelf.jpg",
                             ProductId = 5
                         },
                         new
                         {
                             Id = 6,
-                            AltText = "Elegant floor lamp illuminating a cozy corner.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/floor-lamp.jpg",
                             ProductId = 6
                         },
                         new
                         {
                             Id = 7,
-                            AltText = "Large sectional sofa in a modern living room.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/sectional-sofa.jpg",
                             ProductId = 7
                         },
                         new
                         {
                             Id = 8,
-                            AltText = "Sleek TV stand with a minimalist design.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/tv-stand.jpg",
                             ProductId = 8
                         },
                         new
                         {
                             Id = 9,
-                            AltText = "Minimalist side table next to a modern sofa.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/side-table.jpg",
                             ProductId = 9
                         },
                         new
                         {
                             Id = 10,
-                            AltText = "Versatile ottoman with elegant upholstery.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/ottoman.jpg",
                             ProductId = 10
                         },
                         new
                         {
                             Id = 11,
-                            AltText = "Exclusive wall art enhancing a modern living space.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/wall-art.jpg",
                             ProductId = 11
                         },
                         new
                         {
                             Id = 12,
-                            AltText = "Luxurious area rug in a contemporary living room.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/area-rug.jpg",
                             ProductId = 12
                         },
                         new
                         {
                             Id = 13,
-                            AltText = "Elegant bed frame in a stylish bedroom.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bed-frame.jpg",
                             ProductId = 13
                         },
                         new
                         {
                             Id = 14,
-                            AltText = "Refined nightstand beside a cozy bed.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/nightstand.jpg",
                             ProductId = 14
                         },
                         new
                         {
                             Id = 15,
-                            AltText = "Sophisticated dresser in a modern bedroom.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dresser.jpg",
                             ProductId = 15
                         },
                         new
                         {
                             Id = 16,
-                            AltText = "Luxurious wardrobe with ample storage space.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/wardrobe.jpg",
                             ProductId = 16
                         },
                         new
                         {
                             Id = 17,
-                            AltText = "Chic vanity table in a glamorous personal space.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/vanity.jpg",
                             ProductId = 17
                         },
                         new
                         {
                             Id = 18,
-                            AltText = "Stylish bedside lamp creating a warm ambiance.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bedside-lamp.jpg",
                             ProductId = 18
                         },
                         new
                         {
                             Id = 19,
-                            AltText = "Beautifully crafted dining chair in a modern dining room.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-chair.jpg",
                             ProductId = 19
                         },
                         new
                         {
                             Id = 20,
-                            AltText = "Sleek bar stool in a stylish kitchen setting.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bar-stool.jpg",
                             ProductId = 20
                         },
                         new
                         {
                             Id = 21,
-                            AltText = "Luxurious buffet in a modern dining space.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/buffet.jpg",
                             ProductId = 21
                         },
                         new
                         {
                             Id = 22,
-                            AltText = "Elegant china cabinet showcasing fine dinnerware.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/china-cabinet.jpg",
                             ProductId = 22
                         },
                         new
                         {
                             Id = 23,
-                            AltText = "Modern dining bench in a cozy dining room.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-bench.jpg",
                             ProductId = 23
                         },
                         new
                         {
                             Id = 24,
-                            AltText = "Stunning dining table set for a special occasion.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-table.jpg",
                             ProductId = 24
                         },
                         new
                         {
                             Id = 25,
-                            AltText = "Sleek and functional office desk in a modern workspace.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/office-desk.jpg",
                             ProductId = 25
                         },
                         new
                         {
                             Id = 26,
-                            AltText = "Ergonomic office chair providing comfort and support.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/office-chair.jpg",
                             ProductId = 26
                         },
                         new
                         {
                             Id = 27,
-                            AltText = "Modern bookshelf organizing books and essentials.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bookshelf.jpg",
                             ProductId = 27
                         },
                         new
                         {
                             Id = 28,
-                            AltText = "Sleek file cabinet in a contemporary office setting.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/file-cabinet.jpg",
                             ProductId = 28
                         },
                         new
                         {
                             Id = 29,
-                            AltText = "Elegant desk lamp illuminating a modern workspace.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/desk-lamp.jpg",
                             ProductId = 29
                         },
                         new
                         {
                             Id = 30,
-                            AltText = "Curated office accessories enhancing a luxury workspace.",
+                            AltText = "",
                             ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/office-accessories.jpg",
                             ProductId = 30
                         });
@@ -1124,7 +1159,7 @@ namespace ember.Migrations
             modelBuilder.Entity("ember.Models.Rating", b =>
                 {
                     b.HasOne("ember.Models.Product", "Product")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1145,8 +1180,6 @@ namespace ember.Migrations
             modelBuilder.Entity("ember.Models.Product", b =>
                 {
                     b.Navigation("Images");
-
-                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }

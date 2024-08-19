@@ -8,20 +8,16 @@ public class Product
     public string Description { get; set; } = string.Empty;
     public string SKU { get; set; } = string.Empty;
     public int Stock { get; set; }
-    public string Image { get; set; } = string.Empty;
+    // public string Image { get; set; } = string.Empty;
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
-    private ICollection<Rating> Ratings { get; set; } = null!;
-    public ICollection<ProductImage> Images { get; set; } = null!;
+    public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+    public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
-    public double AverageRating
+    private double? _averageRating;
+    public double? AverageRating
     {
-        get
-        {
-            if (Ratings.Count == 0) return 0;
-
-            return Ratings.Average(r => r.Value);
-        }
+        get => _averageRating ?? (Ratings.Any() ? Ratings.Average(r => r.Value) : (double?)null);
+        set => _averageRating = value;
     }
-
 }

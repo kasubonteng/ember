@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ember.Data;
@@ -11,9 +12,11 @@ using ember.Data;
 namespace ember.Migrations
 {
     [DbContext(typeof(EmberContext))]
-    partial class EmberContextModelSnapshot : ModelSnapshot
+    [Migration("20240816095528_ReseedData")]
+    partial class ReseedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace ember.Migrations
                             Id = 1,
                             CustomerEmail = "john.doe@example.com",
                             CustomerName = "John Doe",
-                            OrderDate = new DateTime(2024, 8, 9, 11, 15, 35, 759, DateTimeKind.Utc).AddTicks(6850),
+                            OrderDate = new DateTime(2024, 8, 6, 9, 55, 28, 487, DateTimeKind.Utc).AddTicks(3070),
                             TotalAmount = 1399.98m
                         },
                         new
@@ -106,7 +109,7 @@ namespace ember.Migrations
                             Id = 2,
                             CustomerEmail = "jane.smith@example.com",
                             CustomerName = "Jane Smith",
-                            OrderDate = new DateTime(2024, 8, 14, 11, 15, 35, 759, DateTimeKind.Utc).AddTicks(6860),
+                            OrderDate = new DateTime(2024, 8, 11, 9, 55, 28, 487, DateTimeKind.Utc).AddTicks(3080),
                             TotalAmount = 1099.98m
                         });
                 });
@@ -181,9 +184,6 @@ namespace ember.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<double?>("AverageRating")
-                        .HasColumnType("double precision");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
@@ -528,6 +528,7 @@ namespace ember.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ProductId")
@@ -1124,7 +1125,7 @@ namespace ember.Migrations
             modelBuilder.Entity("ember.Models.Rating", b =>
                 {
                     b.HasOne("ember.Models.Product", "Product")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1145,8 +1146,6 @@ namespace ember.Migrations
             modelBuilder.Entity("ember.Models.Product", b =>
                 {
                     b.Navigation("Images");
-
-                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
