@@ -63,11 +63,11 @@ public class ProductRepository : IProductRepository
                 .Include(p => p.Images)
                 .Include(p => p.Ratings)
                 .ToListAsync();
-            
+
             var groupedProducts = products
                 .GroupBy(p => p.Category.Name)
-                .ToDictionary(g => g.Key, g => g.Select(MapToDto).ToList());
-            
+                .ToDictionary(g => g.Key, g => g.Select(MapToDto).Take(5).ToList());
+
             return groupedProducts;
         }
         catch (Exception e)
@@ -76,7 +76,7 @@ public class ProductRepository : IProductRepository
             throw;
         }
     }
-    
+
     private static ProductDto MapToDto(Models.Product product)
     {
         return new ProductDto
@@ -87,7 +87,6 @@ public class ProductRepository : IProductRepository
             Price = product.Price,
             ImageUrl = product.Images.FirstOrDefault()?.ImageUrl ?? "",
             Category = product.Category.Name ?? ""
-
         };
     }
 }
