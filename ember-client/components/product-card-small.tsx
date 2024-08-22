@@ -20,7 +20,7 @@ const ProductCardSmall: React.FC<ProductCardSmallProps> = ({
       transition={{ type: "spring", stiffness: 400 }}
     >
       <Link
-        href={`/shop/products/${product.category}/${encodeURIComponent(product.name.toLowerCase().replace(" ", "-"))}`}
+        href={`/shop/products/${encodeURIComponent(product.id.toString())}`}
         className="group flex w-64 flex-col gap-2"
       >
         <div className="relative h-64 w-64 overflow-hidden rounded-xl">

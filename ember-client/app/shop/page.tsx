@@ -10,6 +10,8 @@ import ProductCardSmall from "@/components/product-card-small";
 import { useQuery } from "@tanstack/react-query";
 import { getShopProducts } from "@/data/get-shop-products";
 import { Product } from "@/types";
+import LoadingProductCard from "@/components/product-loading";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CategoryProps {
   category: string;
@@ -60,8 +62,6 @@ const ShopPage = () => {
     queryFn: async () => await getShopProducts(),
   });
 
-  if (isPending) return <div>Loading...</div>;
-
   if (isError) return <div>Error fetching products. Please refresh page!</div>;
 
   return (
@@ -84,9 +84,43 @@ const ShopPage = () => {
       </motion.div>
 
       <div className="w-full max-w-7xl">
-        {categories?.map((category) => (
-          <Category key={category.category} {...category} />
-        ))}
+        {isPending ? (
+          <motion.div
+            className="flex flex-col gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Skeleton className="h-10 w-1/4 bg-[#e0e0e0]" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <Skeleton className="h-6 w-1/2 bg-[#e0e0e0]" />
+            </motion.div>
+            <motion.div
+              className="flex space-x-6 overflow-x-auto py-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {Array.from({ length: 4 }).map((_, index) => (
+                <LoadingProductCard key={index} index={index} />
+              ))}
+            </motion.div>
+          </motion.div>
+        ) : (
+          categories?.map((category) => (
+            <Category key={category.category} {...category} />
+          ))
+        )}
       </div>
 
       <div>
