@@ -9,15 +9,15 @@ import CustomLink from "@/components/link";
 import ProductCardSmall from "@/components/product-card-small";
 import { useQuery } from "@tanstack/react-query";
 import { getShopProducts } from "@/data/get-shop-products";
+import { Product } from "@/types";
 
 interface CategoryProps {
-  title: string;
+  category: string;
   description: string;
   products: Product[];
 }
 
-const Category = ({ title, description, products }: CategoryProps) => {
-
+const Category = ({ category, description, products }: CategoryProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -28,11 +28,11 @@ const Category = ({ title, description, products }: CategoryProps) => {
     >
       <motion.div className="flex flex-col gap-2">
         <Link
-          href={`/shop/products?category=${title.toLowerCase().replace(" ", "+")}`}
+          href={`/shop/products?category=${category.toLowerCase().replace(" ", "+")}`}
           className="flex w-fit items-center gap-2 text-3xl font-bold duration-300 hover:text-primary"
         >
           <span className="group flex items-center gap-2">
-            <span>{title}</span>
+            <span>{category}</span>
             <span className="transition-transform group-hover:translate-x-1">
               <ChevronRight />
             </span>
@@ -43,11 +43,7 @@ const Category = ({ title, description, products }: CategoryProps) => {
 
       <div className="scrollbar-hide flex space-x-6 overflow-x-auto py-4">
         {products.map((product, index) => (
-          <ProductCardSmall
-            key={`${product.title}-${index}`}
-            product={product}
-            index={index}
-          />
+          <ProductCardSmall key={product.id} product={product} index={index} />
         ))}
       </div>
     </motion.div>
@@ -55,14 +51,19 @@ const Category = ({ title, description, products }: CategoryProps) => {
 };
 
 const ShopPage = () => {
-    const {
-      data: categories,
-      isPending,
-      isError,
-    } = useQuery({
-      queryKey: ["products"],
-      queryFn: async () => await getShopProducts(),
-    });
+  const {
+    data: categories,
+    isPending,
+    isError,
+  } = useQuery<CategoryProps[], Error>({
+    queryKey: ["products"],
+    queryFn: async () => await getShopProducts(),
+  });
+
+  if (isPending) return <div>Loading...</div>;
+
+  if (isError) return <div>Error fetching products. Please refresh page!</div>;
+
   return (
     <section className="flex flex-col items-center justify-center px-4 pt-36 lg:px-8 lg:pt-44">
       <motion.div
@@ -83,8 +84,8 @@ const ShopPage = () => {
       </motion.div>
 
       <div className="w-full max-w-7xl">
-        {categories.map((category) => (
-          <Category key={category.title} {...category} />
+        {categories?.map((category) => (
+          <Category key={category.category} {...category} />
         ))}
       </div>
 
