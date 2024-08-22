@@ -6,16 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plus, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types";
 
 interface ProductCardLargeProps {
-  product: {
-    title: string;
-    category: string;
-    image: string;
-    price: number;
-    rating: number;
-    popularity: string;
-  };
+  product: Product;
   index: number;
 }
 
@@ -27,33 +21,33 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
 
   return (
     <motion.div
-      key={`${product.title}-${index}`}
+      key={`${product.name}-${index}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400 }}
     >
       <Link
-        href={`/shop/products/${product.category}/${product.title.toLowerCase().replace(" ", "-")}`}
+        href={`/shop/products/${product.id}`}
         className="group flex w-80 flex-col gap-2 sm:w-64"
       >
         <div className="relative size-80 overflow-hidden rounded-xl sm:h-64 sm:w-64">
           <Image
-            src={product.image}
+            src={product.imageUrl}
             width={256}
             height={256}
-            alt={`${product.title} image`}
+            alt={`${product.name} image`}
             className="size-[320px] object-cover transition-transform duration-300 hover:scale-110 sm:size-[256px]"
           />
         </div>
         <div className="flex items-center justify-between">
           <div className="">
             <p className="text-lg font-medium group-hover:font-bold">
-              {product.title}
+              {product.name}
             </p>
-            <p className="my-1 text-xs text-gray-500">
+            {/* <p className="my-1 text-xs text-gray-500">
               {product.rating} ★{" "}
               {product.popularity === "Most Popular" ? "Most Popular" : ""}
-            </p>
+            </p> */}
             <p className="font-medium text-primary group-hover:font-bold">
               Ghc{product.price.toLocaleString()}
             </p>

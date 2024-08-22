@@ -1,216 +1,46 @@
 "use client";
 
-import ProductCard from "@/components/product-card-large";
-import Filter from "./_components/filter";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import CustomLink from "@/components/link";
-import Link from "next/link";
+import ProductCard from "@/components/product-card-large";
+import getAllProducts from "@/data/get-all-products";
+import { Product } from "@/types";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
+import { useCallback, useState } from "react";
+import Filter from "./_components/filter";
 
-const products = [
-  {
-    title: "Sofa",
-    image: "/shop/featured/sofa.jpg",
-    price: 799,
-    category: "featured",
-    rating: 4.5,
-    popularity: "Most Popular",
-  },
-  {
-    title: "Armchair",
-    image: "/shop/featured/armchair.jpg",
-    price: 399,
-    category: "featured",
-    rating: 4.2,
-    popularity: "Newest",
-  },
-  {
-    title: "Coffee Table",
-    image: "/shop/featured/coffee-table.jpg",
-    price: 199,
-    category: "featured",
-    rating: 4.0,
-    popularity: "Least Popular",
-  },
-  {
-    title: "Dining Table",
-    image: "/shop/featured/dining-table.jpg",
-    price: 599,
-    category: "featured",
-    rating: 4.6,
-    popularity: "Most Popular",
-  },
-  {
-    title: "Bookshelf",
-    image: "/shop/featured/bookshelf.jpg",
-    price: 349,
-    category: "featured",
-    rating: 4.3,
-    popularity: "Popular",
-  },
-  {
-    title: "Floor Lamp",
-    image: "/shop/featured/floor-lamp.jpg",
-    price: 129,
-    category: "featured",
-    rating: 3.8,
-    popularity: "Least Popular",
-  },
-  {
-    title: "Sectional Sofa",
-    image: "/shop/living-room/sectional-sofa.jpg",
-    price: 1299,
-    category: "living room",
-    rating: 4.7,
-    popularity: "Most Popular",
-  },
-  {
-    title: "TV Stand",
-    image: "/shop/living-room/tv-stand.jpg",
-    price: 249,
-    category: "living room",
-    rating: 4.1,
-    popularity: "Popular",
-  },
-  {
-    title: "Side Table",
-    image: "/shop/living-room/side-table.jpg",
-    price: 99,
-    category: "living room",
-    rating: 3.9,
-    popularity: "Least Popular",
-  },
-  {
-    title: "Ottoman",
-    image: "/shop/living-room/ottoman.jpg",
-    price: 149,
-    category: "living room",
-    rating: 4.2,
-    popularity: "Popular",
-  },
-  {
-    title: "Wall Art",
-    image: "/shop/living-room/wall-art.jpg",
-    price: 79,
-    category: "living room",
-    rating: 4.0,
-    popularity: "Least Popular",
-  },
-  {
-    title: "Area Rug",
-    image: "/shop/living-room/area-rug.jpg",
-    price: 199,
-    category: "living room",
-    rating: 4.3,
-    popularity: "Popular",
-  },
-  {
-    title: "Bed Frame",
-    image: "/shop/bedroom/bed-frame.jpg",
-    price: 599,
-    category: "bedroom",
-    rating: 4.6,
-    popularity: "Most Popular",
-  },
-  {
-    title: "Nightstand",
-    image: "/shop/bedroom/nightstand.jpg",
-    price: 129,
-    category: "bedroom",
-    rating: 4.1,
-    popularity: "Popular",
-  },
-  {
-    title: "Dresser",
-    image: "/shop/bedroom/dresser.jpg",
-    price: 449,
-    category: "bedroom",
-    rating: 4.4,
-    popularity: "Popular",
-  },
-  {
-    title: "Wardrobe",
-    image: "/shop/bedroom/wardrobe.jpg",
-    price: 699,
-    category: "bedroom",
-    rating: 4.5,
-    popularity: "Most Popular",
-  },
-  {
-    title: "Vanity",
-    image: "/shop/bedroom/vanity.jpg",
-    price: 299,
-    category: "bedroom",
-    rating: 4.2,
-    popularity: "Popular",
-  },
-  {
-    title: "Bedside Lamp",
-    image: "/shop/bedroom/bedside-lamp.jpg",
-    price: 59,
-    category: "bedroom",
-    rating: 3.8,
-    popularity: "Least Popular",
-  },
-];
+interface APIResponse {
+  products: Product[];
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
 
 const ShopPage = () => {
   const searchParams = useSearchParams();
-  const [filteredProducts, setFilteredProducts] = useState<typeof products>([]);
-  useEffect(() => {
-    const categoryFilter = searchParams.get("category");
-    const minPriceFilter = searchParams.get("minPrice");
-    const maxPriceFilter = searchParams.get("maxPrice");
-    const popularityFilter = searchParams.get("popularity");
-    const ratingFilter = searchParams.get("rating");
-    const searchFilter = searchParams.get("search");
+  const [page, setPage] = useState(Number(searchParams.get("page") || "1"));
+  const pageSize = Number(searchParams.get("pageSize") || "12");
 
-    const filterProducts = (prod: typeof products) => {
-      return prod.filter((product) => {
-        if (
-          categoryFilter &&
-          categoryFilter !== "All" &&
-          categoryFilter.replace(/\+/g, " ").toLowerCase() !==
-            product.category.toLowerCase() &&
-          product.category.toLowerCase() !== categoryFilter.toLowerCase()
-        ) {
-          return false;
-        }
+  const createQueryString = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    params.set("pageSize", pageSize.toString());
+    return params.toString();
+  }, [searchParams, page, pageSize]);
 
-        if (minPriceFilter && product.price.toString() < minPriceFilter) {
-          return false;
-        }
+  const { data, isLoading, isError, isPlaceholderData } = useQuery<
+    APIResponse,
+    Error
+  >({
+    queryKey: ["products", createQueryString(), page],
+    queryFn: async () => await getAllProducts(createQueryString().toString()),
+    placeholderData: keepPreviousData,
+  });
 
-        if (maxPriceFilter && product.price.toString() > maxPriceFilter) {
-          return false;
-        }
+  if (isLoading) return <div>Loading...</div>;
 
-        if (
-          popularityFilter &&
-          product.popularity.toLowerCase() !==
-            popularityFilter.replace(/\+/g, " ").toLowerCase()
-        ) {
-          return false;
-        }
-
-        if (ratingFilter && ratingFilter !== "0") {
-          const minRating = parseInt(ratingFilter);
-          if (product.rating < minRating) return false;
-        }
-
-        if (
-          searchFilter &&
-          !product.title.toLowerCase().includes(searchFilter.toLowerCase())
-        ) {
-          return false;
-        }
-        return true;
-      });
-    };
-
-    setFilteredProducts(filterProducts(products));
-  }, [searchParams]);
+  if (isError) return <div>Error fetching products. Please refresh page!</div>;
 
   return (
     <div className="flex w-full flex-col items-center justify-center px-4 pt-36 lg:px-8 lg:pt-44">
@@ -235,10 +65,48 @@ const ShopPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {filteredProducts.map((product, index) => (
-          <ProductCard key={product.title} index={index} product={product} />
+        {data?.products.map((product, index) => (
+          <ProductCard key={product.name} index={index} product={product} />
         ))}
       </div>
+
+      {data?.totalPages && data?.totalPages > 1 && (
+        <div className="mt-16 flex items-center justify-center space-x-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </motion.button>
+          {Array.from({ length: data.totalPages }, (_, i) => (
+            <motion.button
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`rounded-lg px-4 py-2 text-sm font-medium ${
+                page === i + 1
+                  ? "bg-primary text-white"
+                  : "border border-primary bg-transparent text-primary"
+              }`}
+              onClick={() => setPage(i + 1)}
+            >
+              {i + 1}
+            </motion.button>
+          ))}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+            onClick={() => setPage(page + 1)}
+            disabled={page === data.totalPages}
+          >
+            Next
+          </motion.button>
+        </div>
+      )}
     </div>
   );
 };
