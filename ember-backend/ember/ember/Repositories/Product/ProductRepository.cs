@@ -100,7 +100,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task<Dictionary<string, List<ProductDto>>> GetProductsByCategoryAsync()
+    public async Task<List<ShopProductDto>> GetProductsByCategoryAsync()
     {
         try
         {
@@ -111,8 +111,13 @@ public class ProductRepository : IProductRepository
                 .ToListAsync();
 
             var groupedProducts = products
-                .GroupBy(p => p.Category.Name)
-                .ToDictionary(g => g.Key, g => g.Select(MapToDto).Take(5).ToList());
+                .GroupBy(p => p.Category)
+                .Select(group => new ShopProductDto
+                {
+                    Category = group.Key.Name,
+                    Description = group.Key.Description,
+                    Products = group.Select(MapToDto).Take(5).ToList()
+                }).ToList();
 
             return groupedProducts;
         }

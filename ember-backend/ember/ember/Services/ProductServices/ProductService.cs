@@ -46,7 +46,7 @@ public class ProductService : IProductService
         };
     }
 
-    public async Task<Dictionary<string, List<ProductDto>>> GetShopProductByCategoryAsync()
+    public async Task<List<ShopProductDto>> GetShopProductByCategoryAsync()
     {
         var products = await _productRepository.GetProductsByCategoryAsync();
 

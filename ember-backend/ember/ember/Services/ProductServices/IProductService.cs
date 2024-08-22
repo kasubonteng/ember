@@ -7,6 +7,6 @@ public interface IProductService
 {
     Task<(IEnumerable<ProductDto>, int?)> GetAllProductsAsync(ProductQueryParams queryParams);
     Task<ProductByIdDto?> GetProductByIdAsync(int id);
-    Task<Dictionary<string, List<ProductDto>>> GetShopProductByCategoryAsync();
+    Task<List<ShopProductDto>> GetShopProductByCategoryAsync();
     Task<Dictionary<string, ProductDto>> GetBestSellingProductAsync();
 }

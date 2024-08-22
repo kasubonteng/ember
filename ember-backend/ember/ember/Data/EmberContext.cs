@@ -21,11 +21,11 @@ public class EmberContext : DbContext
     {
         var categories = new Category[]
         {
-            new Category { Id = 1, Name = "Featured" },
-            new Category { Id = 2, Name = "Living Room" },
-            new Category { Id = 3, Name = "Bedroom" },
-            new Category { Id = 4, Name = "Dining" },
-            new Category { Id = 5, Name = "Office" }
+            new Category { Id = 1, Name = "Featured", Description = "Browse our handpicked selection of bestsellers, showcasing the very best of Ember's design philosophy."},
+            new Category { Id = 2, Name = "Living Room", Description = "Transform your living space with our curated collection of comfortable and stylish furniture."},
+            new Category { Id = 3, Name = "Bedroom", Description = "Create your perfect sanctuary with our range of comfortable and elegant bedroom furniture."},
+            new Category { Id = 4, Name = "Dining", Description = "Elevate your dining experience with our selection of elegant dining furniture and accessories."},
+            new Category { Id = 5, Name = "Office", Description = "Design a productive and stylish workspace with our range of modern office furniture and accessories." }
         };
 
         modelBuilder.Entity<Category>().HasData(categories);
