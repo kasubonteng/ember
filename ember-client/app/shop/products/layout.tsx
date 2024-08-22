@@ -6,15 +6,15 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    // <Suspense
-    //   fallback={
-    //     <div className="flex h-screen items-center justify-center">
-    //       <p className="text-2xl font-semibold">Loading...</p>
-    //     </div>
-    //   }
-    // >
-    <>{children}</>
-    // </Suspense>
+    <Suspense
+      fallback={
+        <div className="flex h-screen items-center justify-center">
+          <p className="text-2xl font-semibold">Loading...</p>
+        </div>
+      }
+    >
+      {children}
+    </Suspense>
   );
 };
 
