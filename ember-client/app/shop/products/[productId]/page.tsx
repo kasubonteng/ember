@@ -14,14 +14,9 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  images: string[];
-}
+import { Product } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import { getSingleProduct } from "@/data/get-single-product";
 
 interface ProductPageProps {
   params: {
@@ -29,29 +24,18 @@ interface ProductPageProps {
   };
 }
 
-const mockProduct: Product = {
-  id: "1",
-  name: "Sofa",
-  description:
-    "A comfortable sofa for your living room. Made from high-quality materials.",
-  price: 799,
-  images: [
-    "/shop/featured/sofa.jpg",
-    "/shop/featured/armchair.jpg",
-    "/shop/featured/floor-lamp.jpg",
-    "/shop/featured/bookshelf.jpg",
-  ],
-};
-
 const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
-  const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState("1");
 
-  useEffect(() => {
-    // Fetch product data from an API
-    setProduct(mockProduct);
-  }, []);
+  const {
+    data: product,
+    isPending,
+    isError,
+  } = useQuery<Product, Error>({
+    queryKey: ["product", productId],
+    queryFn: async () => getSingleProduct(Number(productId)),
+  });
 
   const handleAddToCart = () => {
     // Implement add to cart logic here
@@ -63,6 +47,22 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
       <div className="flex h-full min-h-[70vh] w-full flex-col items-center justify-center gap-5 text-center text-2xl">
         Product not found
         <CustomLink href="/shop/products">Back to All Products</CustomLink>
+      </div>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <div className="flex h-full min-h-[70vh] w-full items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex h-full min-h-[70vh] w-full items-center justify-center">
+        Error fetching product. Please refresh page!
       </div>
     );
   }
@@ -97,7 +97,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src={product.images[selectedImage]}
+                  src={product.imageUrl}
                   alt={product.name}
                   width={700}
                   height={500}
@@ -107,7 +107,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
               </motion.div>
             </AnimatePresence>
 
-            <div className="flex gap-4 overflow-x-auto p-2">
+            {/* <div className="flex gap-4 overflow-x-auto p-2">
               {product.images.map((image, index) => (
                 <motion.div
                   key={index}
@@ -126,7 +126,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
                   />
                 </motion.div>
               ))}
-            </div>
+            </div> */}
           </motion.div>
 
           <motion.div
@@ -139,7 +139,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
             <p className="text-xl font-medium text-primary">
               Ghc {product.price.toFixed(2)}
             </p>
-            <p className="text-lg">{product.description}</p>
+            {/* <p className="text-lg">{product.description}</p> */}
 
             <div className="flex flex-col gap-2">
               <Label htmlFor="quantity" className="text-lg">
