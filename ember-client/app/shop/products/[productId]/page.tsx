@@ -24,6 +24,16 @@ interface ProductPageProps {
   };
 }
 
+interface APIResponse extends Product {
+  // Description of the product.
+  description: string;
+  imageUrls: {
+    imageUrl: string;
+    id: string;
+    altText: string;
+  }[];
+}
+
 const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState("1");
@@ -32,7 +42,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
     data: product,
     isPending,
     isError,
-  } = useQuery<Product, Error>({
+  } = useQuery<APIResponse, Error>({
     queryKey: ["product", productId],
     queryFn: async () => getSingleProduct(Number(productId)),
   });
@@ -41,15 +51,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
     // Implement add to cart logic here
     toast.success(`${quantity} ${product?.name} added to cart`);
   };
-
-  if (!product) {
-    return (
-      <div className="flex h-full min-h-[70vh] w-full flex-col items-center justify-center gap-5 text-center text-2xl">
-        Product not found
-        <CustomLink href="/shop/products">Back to All Products</CustomLink>
-      </div>
-    );
-  }
 
   if (isPending) {
     return (
@@ -97,8 +98,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src={product.imageUrl}
-                  alt={product.name}
+                  src={product?.imageUrls?.[selectedImage]?.imageUrl}
+                  alt={product.imageUrls[selectedImage].altText}
                   width={700}
                   height={500}
                   priority
@@ -107,8 +108,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
               </motion.div>
             </AnimatePresence>
 
-            {/* <div className="flex gap-4 overflow-x-auto p-2">
-              {product.images.map((image, index) => (
+            <div className="flex gap-4 overflow-x-auto p-2">
+              {product.imageUrls.map((images, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.05 }}
@@ -116,7 +117,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
                   onClick={() => setSelectedImage(index)}
                 >
                   <Image
-                    src={image}
+                    src={images?.imageUrl}
                     alt={`${product.name} thumbnail ${index + 1}`}
                     width={100}
                     height={100}
@@ -126,7 +127,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
                   />
                 </motion.div>
               ))}
-            </div> */}
+            </div>
           </motion.div>
 
           <motion.div
@@ -139,7 +140,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
             <p className="text-xl font-medium text-primary">
               Ghc {product.price.toFixed(2)}
             </p>
-            {/* <p className="text-lg">{product.description}</p> */}
+            <p className="text-lg">{product.description}</p>
 
             <div className="flex flex-col gap-2">
               <Label htmlFor="quantity" className="text-lg">

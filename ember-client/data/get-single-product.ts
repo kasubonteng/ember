@@ -1,6 +1,14 @@
 import { Product } from "@/types";
 
-export async function getSingleProduct(id: number): Promise<Product> {
+interface APIResponse extends Product {
+  description: string;
+  imageUrls: {
+    imageUrl: string;
+    id: string;
+    altText: string;
+  }[];
+}
+export async function getSingleProduct(id: number): Promise<APIResponse> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API_URL}/product/${id}`,
   );
