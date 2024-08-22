@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import Filter from "./_components/filter";
+import LoadingProductCard from "@/components/product-loading";
 
 interface APIResponse {
   products: Product[];
@@ -29,7 +30,7 @@ const ShopPage = () => {
     return params.toString();
   }, [searchParams, page, pageSize]);
 
-  const { data, isLoading, isError, isPlaceholderData } = useQuery<
+  const { data, isPending, isError, isPlaceholderData } = useQuery<
     APIResponse,
     Error
   >({
@@ -37,8 +38,6 @@ const ShopPage = () => {
     queryFn: async () => await getAllProducts(createQueryString().toString()),
     placeholderData: keepPreviousData,
   });
-
-  if (isLoading) return <div>Loading...</div>;
 
   if (isError) return <div>Error fetching products. Please refresh page!</div>;
 
@@ -65,9 +64,13 @@ const ShopPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {data?.products.map((product, index) => (
-          <ProductCard key={product.name} index={index} product={product} />
-        ))}
+        {isPending
+          ? Array.from({ length: pageSize }, (_, i) => (
+              <LoadingProductCard key={i} index={i} />
+            ))
+          : data?.products.map((product, index) => (
+              <ProductCard key={product.name} index={index} product={product} />
+            ))}
       </div>
 
       {data?.totalPages && data?.totalPages > 1 && (
