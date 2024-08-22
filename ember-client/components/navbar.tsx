@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import useCartStore from "@/stores/cart";
 
 const navLinks = [
   { name: "Furniture", href: "/furniture" },
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const cartTotalItems = useCartStore((state) => state.getTotalItems);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,8 +109,13 @@ const Navbar = () => {
         <motion.div variants={linkVariants} className="flex items-center gap-4">
           <Link
             href="/cart"
-            className="transition-colors duration-150 hover:text-primary"
+            className="relative transition-colors duration-150 hover:text-primary"
           >
+            {cartTotalItems() > 0 && (
+              <span className="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold text-white">
+                {cartTotalItems()}
+              </span>
+            )}
             <ShoppingBag className="size-[34px]" />
           </Link>
           <button

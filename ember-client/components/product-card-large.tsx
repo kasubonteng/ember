@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Plus, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types";
+import useCartStore from "@/stores/cart";
 
 interface ProductCardLargeProps {
   product: Product;
@@ -17,6 +18,7 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
   product,
   index,
 }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -65,6 +67,7 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
               onHoverStart={() => setIsHovered(true)}
               onHoverEnd={() => setIsHovered(false)}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              onClick={() => addToCart({ ...product, quantity: 1 })}
             >
               <motion.span
                 className="absolute flex items-center justify-center"
