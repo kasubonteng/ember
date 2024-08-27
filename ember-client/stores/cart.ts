@@ -1,6 +1,6 @@
 import { Product } from "@/types";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export interface CartItem extends Product {
   quantity: number;
@@ -29,7 +29,7 @@ const useCartStore = create<CartState>()(
           if (existingProduct) {
             return {
               items: state.items.map((item) =>
-                item.id === item.id
+                item.id === product.id
                   ? { ...item, quantity: item.quantity + 1 }
                   : item,
               ),
@@ -64,7 +64,7 @@ const useCartStore = create<CartState>()(
     }),
     {
       name: "cart-storage",
-      getStorage: () => localStorage,
+      storage: createJSONStorage<CartState>(() => localStorage),
     },
   ),
 );
