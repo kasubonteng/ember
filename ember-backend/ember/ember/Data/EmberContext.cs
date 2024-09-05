@@ -347,210 +347,210 @@ public class EmberContext : DbContext
     {
         Id = 1,
         ProductId = products[0].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/sofa.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/sofa.jpg",
         AltText = "Luxurious modern sofa in a stylish living room."
     },
     new ProductImage
     {
         Id = 2,
         ProductId = products[1].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/armchair.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/armchair.jpg",
         AltText = "Elegant armchair with sophisticated design."
     },
     new ProductImage
     {
         Id = 3,
         ProductId = products[2].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/coffee-table.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/coffee-table.jpg",
         AltText = "Chic and modern coffee table in a minimalist setting."
     },
     new ProductImage
     {
         Id = 4,
         ProductId = products[3].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-table.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/dining-table.jpg",
         AltText = "Stylish dining table set for a cozy meal."
     },
     new ProductImage
     {
         Id = 5,
         ProductId = products[4].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bookshelf.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/bookshelf.jpg",
         AltText = "Modern bookshelf showcasing a collection of books."
     },
     new ProductImage
     {
         Id = 6,
         ProductId = products[5].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/floor-lamp.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/floor-lamp.jpg",
         AltText = "Elegant floor lamp illuminating a cozy corner."
     },
     new ProductImage
     {
         Id = 7,
         ProductId = products[6].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/sectional-sofa.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/sectional-sofa.jpg",
         AltText = "Large sectional sofa in a modern living room."
     },
     new ProductImage
     {
         Id = 8,
         ProductId = products[7].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/tv-stand.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/tv-stand.jpg",
         AltText = "Sleek TV stand with a minimalist design."
     },
     new ProductImage
     {
         Id = 9,
         ProductId = products[8].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/side-table.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/side-table.jpg",
         AltText = "Minimalist side table next to a modern sofa."
     },
     new ProductImage
     {
         Id = 10,
         ProductId = products[9].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/ottoman.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/ottoman.jpg",
         AltText = "Versatile ottoman with elegant upholstery."
     },
     new ProductImage
     {
         Id = 11,
         ProductId = products[10].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/wall-art.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/wall-art.jpg",
         AltText = "Exclusive wall art enhancing a modern living space."
     },
     new ProductImage
     {
         Id = 12,
         ProductId = products[11].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/area-rug.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/area-rug.jpg",
         AltText = "Luxurious area rug in a contemporary living room."
     },
     new ProductImage
     {
         Id = 13,
         ProductId = products[12].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bed-frame.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/bed-frame.jpg",
         AltText = "Elegant bed frame in a stylish bedroom."
     },
     new ProductImage
     {
         Id = 14,
         ProductId = products[13].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/nightstand.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/nightstand.jpg",
         AltText = "Refined nightstand beside a cozy bed."
     },
     new ProductImage
     {
         Id = 15,
         ProductId = products[14].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dresser.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/dresser.jpg",
         AltText = "Sophisticated dresser in a modern bedroom."
     },
     new ProductImage
     {
         Id = 16,
         ProductId = products[15].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/wardrobe.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/wardrobe.jpg",
         AltText = "Luxurious wardrobe with ample storage space."
     },
     new ProductImage
     {
         Id = 17,
         ProductId = products[16].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/vanity.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/vanity.jpg",
         AltText = "Chic vanity table in a glamorous personal space."
     },
     new ProductImage
     {
         Id = 18,
         ProductId = products[17].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bedside-lamp.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/bedside-lamp.jpg",
         AltText = "Stylish bedside lamp creating a warm ambiance."
     },
     new ProductImage
     {
         Id = 19,
         ProductId = products[18].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-chair.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/dining-chair.jpg",
         AltText = "Beautifully crafted dining chair in a modern dining room."
     },
     new ProductImage
     {
         Id = 20,
         ProductId = products[19].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bar-stool.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/bar-stool.jpg",
         AltText = "Sleek bar stool in a stylish kitchen setting."
     },
     new ProductImage
     {
         Id = 21,
         ProductId = products[20].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/buffet.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/buffet.jpg",
         AltText = "Luxurious buffet in a modern dining space."
     },
     new ProductImage
     {
         Id = 22,
         ProductId = products[21].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/china-cabinet.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/china-cabinet.jpg",
         AltText = "Elegant china cabinet showcasing fine dinnerware."
     },
     new ProductImage
     {
         Id = 23,
         ProductId = products[22].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-bench.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/dining-bench.jpg",
         AltText = "Modern dining bench in a cozy dining room."
     },
     new ProductImage
     {
         Id = 24,
         ProductId = products[23].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/dining-table.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/dining-table.jpg",
         AltText = "Stunning dining table set for a special occasion."
     },
     new ProductImage
     {
         Id = 25,
         ProductId = products[24].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/office-desk.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/office-desk.jpg",
         AltText = "Sleek and functional office desk in a modern workspace."
     },
     new ProductImage
     {
         Id = 26,
         ProductId = products[25].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/office-chair.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/office-chair.jpg",
         AltText = "Ergonomic office chair providing comfort and support."
     },
     new ProductImage
     {
         Id = 27,
         ProductId = products[26].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/bookshelf.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/bookshelf.jpg",
         AltText = "Modern bookshelf organizing books and essentials."
     },
     new ProductImage
     {
         Id = 28,
         ProductId = products[27].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/file-cabinet.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/file-cabinet.jpg",
         AltText = "Sleek file cabinet in a contemporary office setting."
     },
     new ProductImage
     {
         Id = 29,
         ProductId = products[28].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/desk-lamp.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/desk-lamp.jpg",
         AltText = "Elegant desk lamp illuminating a modern workspace."
     },
     new ProductImage
     {
         Id = 30,
         ProductId = products[29].Id,
-        ImageUrl = "https://ember-kasubonteng.s3.eu-west-2.amazonaws.com/office-accessories.jpg",
+        ImageUrl = "https://hnjusjswsficvzglhkfw.supabase.co/storage/v1/object/public/ember/office-accessories.jpg",
         AltText = "Curated office accessories enhancing a luxury workspace."
     },
 };
