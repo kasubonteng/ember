@@ -38,7 +38,7 @@ const Card = ({ title, description, image, imagePosition }: CardProps) => {
             height={445}
             alt={`${title} image`}
             priority
-            className="h-[445px] w-[629px] rounded-xl shadow-lg"
+            className="aspect-square rounded-xl shadow-lg md:aspect-auto md:h-[445px] md:w-[629px]"
           />
         </motion.div>
       </Link>
@@ -71,28 +71,28 @@ const furnitureItems = [
     title: "Living Room",
     description:
       "Create a serene and stylish living space with our modern sofas, coffee tables, and storage solutions. Perfect for unwinding or entertaining.",
-    image: "/furniture/living-room.jpg",
+    image: "/furniture/living-room.webp",
     imagePosition: "left" as const,
   },
   {
     title: "Bedroom",
     description:
       "Transform your bedroom into a peaceful retreat with our minimalist bed frames, dressers, and nightstands. Sleep better in a space that soothes the senses.",
-    image: "/furniture/bedroom.jpg",
+    image: "/furniture/bedroom.webp",
     imagePosition: "right" as const,
   },
   {
     title: "Office",
     description:
       "Work efficiently and elegantly with our modern desks, chairs, and shelving. Designed to enhance productivity and keep your workspace clutter-free.",
-    image: "/furniture/office.jpg",
+    image: "/furniture/office.webp",
     imagePosition: "left" as const,
   },
   {
     title: "Dining Room",
     description:
       "Gather around our sleek dining tables and chairs for meals that are as stylish as they are delicious. Elevate your dining experience with our modern furniture.",
-    image: "/furniture/dining-room.jpg",
+    image: "/furniture/dining-room.webp",
     imagePosition: "right" as const,
   },
 ];

@@ -25,7 +25,7 @@ const testimonials = [
     name: "Jane Smith",
     position: "CTO",
     company: "Tech Corp",
-    image: "/testimonials/testimonial-2.jpg",
+    image: "/testimonials/testimonial-2.webp",
     content:
       "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis ornare vel eu leo.",
   },
@@ -33,7 +33,7 @@ const testimonials = [
     name: "Alice Johnson",
     position: "Designer",
     company: "Creative Studios",
-    image: "/testimonials/testimonial-3.jpg",
+    image: "/testimonials/testimonial-3.webp",
     content:
       "Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla.",
   },
@@ -222,7 +222,7 @@ const Testimonials = () => {
                     avatar={testimonial.image}
                     rating={5}
                     review={testimonial.content}
-                    productImage="/testimonials/testimonial-2.jpg"
+                    productImage="/testimonials/testimonial-2.webp"
                   />
                 </motion.div>
               </CarouselItem>

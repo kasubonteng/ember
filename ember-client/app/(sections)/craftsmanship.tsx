@@ -74,11 +74,11 @@ const Craftsmanship = () => {
           className="relative w-full lg:order-2 lg:w-1/2"
         >
           <Image
-            src="/craftsmanship/craftsmanship-1.jpg"
+            src="/craftsmanship/craftsmanship-1.webp"
             width={629}
             height={445}
             alt="craftsmanship image"
-            className="h-[445px] w-[629px] rounded-lg shadow-xl"
+            className="aspect-square rounded-lg shadow-xl lg:h-[445px] lg:w-[629px]"
           />
           <motion.div
             initial={{ opacity: 0, x: 20 }}

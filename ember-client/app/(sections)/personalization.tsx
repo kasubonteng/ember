@@ -75,11 +75,11 @@ const Personalization = () => {
             className="absolute left-0 top-0 z-10"
           >
             <Image
-              src="/personalization/personalization-1.jpg"
+              src="/personalization/personalization-1.webp"
               width={200}
               height={300}
               alt="personalization image 1"
-              className="h-[300px] w-[200px] rounded-lg shadow-lg"
+              className="aspect-square rounded-lg shadow-lg md:aspect-auto md:h-[300px] md:w-[200px]"
             />
           </motion.div>
           <motion.div
@@ -87,11 +87,11 @@ const Personalization = () => {
             className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform"
           >
             <Image
-              src="/personalization/personalization-3.jpg"
+              src="/personalization/personalization-3.webp"
               width={400}
               height={300}
               alt="personalization image 3"
-              className="h-[300px] w-[400px] rounded-lg shadow-lg"
+              className="aspect-square rounded-lg shadow-lg md:aspect-auto md:h-[300px] md:w-[400px]"
             />
           </motion.div>
           <motion.div
@@ -99,11 +99,11 @@ const Personalization = () => {
             className="absolute bottom-0 right-0 z-10"
           >
             <Image
-              src="/personalization/personalization-2.jpg"
+              src="/personalization/personalization-2.webp"
               width={200}
               height={280}
               alt="personalization image 2"
-              className="h-[280px] w-[200px] rounded-lg shadow-lg"
+              className="aspect-square rounded-lg shadow-lg md:aspect-auto md:h-[280px] md:w-[200px]"
             />
           </motion.div>
         </motion.div>

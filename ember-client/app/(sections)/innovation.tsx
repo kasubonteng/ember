@@ -53,7 +53,7 @@ const Innovation = () => {
             width={629}
             height={445}
             alt="innovation image 1"
-            className="h-[445px] w-[629px] rounded-lg shadow-xl"
+            className="aspect-square rounded-lg shadow-xl md:h-[445px] md:w-[629px]"
           />
           <motion.div
             initial={{ opacity: 0, x: -20 }}

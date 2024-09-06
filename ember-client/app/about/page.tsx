@@ -79,7 +79,7 @@ const HeroSection = () => (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="relative flex h-full w-full items-end justify-start bg-[url('/about-us-bg.jpg')] bg-cover bg-center bg-no-repeat xl:bg-bottom"
+      className="relative flex h-full w-full items-end justify-start bg-[url('/about-us-bg.webp')] bg-cover bg-center bg-no-repeat xl:bg-bottom"
     >
       <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent to-black/50"></div>
       <div className="z-10 mx-4 mb-20 max-w-[861px] md:mx-20 lg:mb-40 xl:mx-40 5xl:max-w-[1000px]">
@@ -338,22 +338,22 @@ const TeamSection = () => {
     {
       name: "Jane Doe",
       role: "Founder & CEO",
-      image: "/api/placeholder/200/200",
+      image: "/about/jane-doe.jpg",
     },
     {
       name: "John Smith",
       role: "Lead Designer",
-      image: "/api/placeholder/200/200",
+      image: "/about/john-smith.jpg",
     },
     {
       name: "Emily Brown",
       role: "Head of Operations",
-      image: "/api/placeholder/200/200",
+      image: "/about/emily-brown.jpg",
     },
     {
       name: "Michael Johnson",
       role: "Chief Sustainability Officer",
-      image: "/api/placeholder/200/200",
+      image: "/about/michael-johnson.jpg",
     },
   ];
 
@@ -406,15 +406,3 @@ const TeamSection = () => {
     </motion.section>
   );
 };
-
-// const ContactSection = () => {
-//   const [ref, inView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.1,
-//   });
-
-//   return (
-//     <motion.section
-//       ref={ref}
-//       initial="hidden"
-//       animate={inView ? "visible
