@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination:
+          "http://emberdevelopment.eba-yrmbfm2p.eu-west-2.elasticbeanstalk.com/api/:path*",
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

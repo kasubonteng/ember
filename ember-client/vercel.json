@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://emberdevelopment.eba-yrmbfm2p.eu-west-2.elasticbeanstalk.com/api"
+    }
+  ]
+}

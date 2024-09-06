@@ -9,9 +9,7 @@ interface APIResponse extends Product {
   }[];
 }
 export async function getSingleProduct(id: number): Promise<APIResponse> {
-  const response = await fetch(
-    `${process.env.NEXT_BASE_API_URL}/product/${id}`,
-  );
+  const response = await fetch(`/api/product/${id}`);
   if (!response.ok) {
     throw new Error("Error fetching data");
   }
