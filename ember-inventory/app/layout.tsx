@@ -61,7 +61,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${gilroy.variable} font-sans antialiased`}
       >
-        <TooltipProvider>{children}</TooltipProvider>
+        <TooltipProvider delayDuration={50}>{children}</TooltipProvider>
       </body>
     </html>
   );
