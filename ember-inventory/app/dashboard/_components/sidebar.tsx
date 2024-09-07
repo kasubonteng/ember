@@ -43,7 +43,6 @@ export const NAV_LINKS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const activeLink = NAV_LINKS.find((link) => link.href === pathname);
-  console.log("activeLink", activeLink);
 
   return (
     <>

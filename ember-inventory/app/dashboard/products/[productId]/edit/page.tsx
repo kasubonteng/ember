@@ -1,28 +1,19 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Form } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import ProductCategory from "./_components/product-category";
 import ProductDetails from "./_components/product-details";
 import ProductImages from "./_components/product-images";
 import ProductStatus from "./_components/product-status";
 import Stock from "./_components/stock";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
 
 export interface Product {
   id: string;
@@ -44,7 +35,7 @@ const productDetails: Product = {
   name: "Gamer Gear Pro Controller",
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.",
-  stock: 100,
+  stock: 101,
   price: 49.99,
   category: "electronics",
   status: "active",
@@ -82,11 +73,10 @@ const formSchema = z.object({
 
 export default function EditProductPage() {
   const router = useRouter();
-  const [product, setProduct] = useState(productDetails);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: product,
+    defaultValues: productDetails,
   });
 
   function handleSubmit(data: z.infer<typeof formSchema>) {
@@ -129,14 +119,14 @@ export default function EditProductPage() {
           </div>
           <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
             <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
-              <ProductDetails product={product} setProduct={setProduct} />
-              <Stock product={product} setProduct={setProduct} />
-              <ProductCategory product={product} setProduct={setProduct} />
+              <ProductDetails />
+              <Stock />
+              <ProductCategory />
             </div>
 
             <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
-              <ProductStatus product={product} setProduct={setProduct} />
-              <ProductImages product={product} setProduct={setProduct} />
+              <ProductStatus />
+              <ProductImages />
             </div>
           </div>
           <div className="flex items-center justify-center gap-2 md:hidden">

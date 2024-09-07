@@ -1,14 +1,20 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -17,19 +23,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { PlusCircle } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Product } from "../page";
+import { useFormContext } from "react-hook-form";
 
-const Stock = ({
-  product,
-  setProduct,
-}: {
-  product: Product;
-  setProduct: Dispatch<SetStateAction<Product>>;
-}) => {
+const Stock = () => {
+  const { control } = useFormContext();
   return (
     <>
       <Card>
@@ -48,35 +45,43 @@ const Stock = ({
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <Label htmlFor={`stock-${product.id}`} className="sr-only">
-                    Stock
-                  </Label>
-                  <Input
-                    id={`stock-${product.id}`}
-                    type="number"
-                    value={product.stock}
-                    onChange={(e) =>
-                      setProduct({
-                        ...product,
-                        stock: parseInt(e.target.value),
-                      })
-                    }
+                  <FormField
+                    control={control}
+                    name="stock"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel
+                          htmlFor={`stock-${field}`}
+                          className="sr-only"
+                        >
+                          Stock
+                        </FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
                 </TableCell>
                 <TableCell>
-                  <Label htmlFor={`price-${product.id}`} className="sr-only">
-                    Price
-                  </Label>
-                  <Input
-                    id={`price-${product.id}`}
-                    type="number"
-                    value={product.price}
-                    onChange={(e) =>
-                      setProduct({
-                        ...product,
-                        price: parseInt(e.target.value),
-                      })
-                    }
+                  <FormField
+                    control={control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel
+                          htmlFor={`price-${field}`}
+                          className="sr-only"
+                        >
+                          Price
+                        </FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
                 </TableCell>
               </TableRow>

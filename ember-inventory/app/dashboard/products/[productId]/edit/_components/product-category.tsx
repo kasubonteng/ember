@@ -1,7 +1,12 @@
 "use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -9,16 +14,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { Product } from "../page";
+import { useFormContext } from "react-hook-form";
 
-export default function ProductCategory({
-  product,
-  setProduct,
-}: {
-  product: Product;
-  setProduct: Dispatch<SetStateAction<Product>>;
-}) {
+export default function ProductCategory() {
+  const { control } = useFormContext();
+
   return (
     <Card>
       <CardHeader>
@@ -27,22 +27,32 @@ export default function ProductCategory({
       <CardContent>
         <div className="grid gap-6 sm:grid-cols-3">
           <div className="grid gap-3">
-            <Label htmlFor="category">Category</Label>
-            <Select
-              value={product.category}
-              onValueChange={(value) =>
-                setProduct({ ...product, category: value })
-              }
-            >
-              <SelectTrigger id="category" aria-label="Select category">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent defaultValue={product.category}>
-                <SelectItem value="clothing">Clothing</SelectItem>
-                <SelectItem value="electronics">Electronics</SelectItem>
-                <SelectItem value="accessories">Accessories</SelectItem>
-              </SelectContent>
-            </Select>
+            <FormField
+              control={control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="clothing">Clothing</SelectItem>
+                      <SelectItem value="electronics">Electronics</SelectItem>
+                      <SelectItem value="accessories">Accessories</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
       </CardContent>

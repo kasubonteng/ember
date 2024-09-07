@@ -7,19 +7,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import React, { Dispatch, SetStateAction } from "react";
-import { Product } from "../page";
+import { useFormContext } from "react-hook-form";
 
-export default function ProductDetails({
-  product,
-  setProduct,
-}: {
-  product: Product;
-  setProduct: Dispatch<SetStateAction<Product>>;
-}) {
+export default function ProductDetails() {
+  const { control } = useFormContext();
   return (
     <Card>
       <CardHeader>
@@ -31,24 +31,33 @@ export default function ProductDetails({
       <CardContent>
         <div className="grid gap-6">
           <div className="grid gap-3">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              type="text"
-              className="w-full"
-              value={product.name}
-              onChange={(e) => setProduct({ ...product, name: e.target.value })}
+            <FormField
+              control={control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </div>
           <div className="grid gap-3">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={product.description}
-              onChange={(e) =>
-                setProduct({ ...product, description: e.target.value })
-              }
-              className="min-h-32"
+            <FormField
+              control={control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </div>
         </div>

@@ -1,5 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -7,37 +13,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React, { Dispatch, SetStateAction } from "react";
-import { Product } from "../page";
+import { useFormContext } from "react-hook-form";
 
-export default function ProductStatus({
-  product,
-  setProduct,
-}: {
-  product: Product;
-  setProduct: Dispatch<SetStateAction<Product>>;
-}) {
+export default function ProductStatus() {
+  const { control } = useFormContext();
   return (
     <Card x-chunk="A card with a form to edit the product status">
       <CardContent className="pt-6">
         <div className="grid gap-6">
           <div className="grid gap-3">
-            <Label htmlFor="status">Status</Label>
-            <Select
-              onValueChange={(value) =>
-                setProduct({ ...product, status: value })
-              }
-              defaultValue={product.status}
-            >
-              <SelectTrigger id="status" aria-label="Select status">
-                <SelectValue placeholder="Select status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="draft">Draft</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="archived">Archived</SelectItem>
-              </SelectContent>
-            </Select>
+            <FormField
+              control={control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Status</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="draft">Draft</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="archived">Archived</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
       </CardContent>
