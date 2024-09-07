@@ -59,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gilroy.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gilroy.variable} font-sans antialiased`}
       >
         <TooltipProvider>{children}</TooltipProvider>
       </body>
