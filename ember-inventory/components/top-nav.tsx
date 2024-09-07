@@ -37,8 +37,8 @@ export default function TopNav() {
     <Breadcrumb className="hidden md:flex">
       <BreadcrumbList>
         {links.map((link, index) => (
-          <>
-            <BreadcrumbItem key={index}>
+          <React.Fragment key={index}>
+            <BreadcrumbItem>
               <BreadcrumbLink asChild>
                 <Link
                   href={`/${links.slice(0, index + 1).join("/")}`}
@@ -49,7 +49,7 @@ export default function TopNav() {
               </BreadcrumbLink>
             </BreadcrumbItem>
             {index < links.length - 1 && <BreadcrumbSeparator />}
-          </>
+          </React.Fragment>
         ))}
 
         {pageTitle && (

@@ -1,3 +1,5 @@
+"use client";
+
 import TopNav from "@/components/top-nav";
 import { Button } from "@/components/ui/button";
 import {

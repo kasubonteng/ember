@@ -1,8 +1,11 @@
+"use client";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import {
   Home,
   Package,
@@ -12,6 +15,7 @@ import {
   Users2,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const NAV_LINKS = [
   {
@@ -37,6 +41,10 @@ export const NAV_LINKS = [
 ] as const;
 
 export default function Sidebar() {
+  const pathname = usePathname();
+  const activeLink = NAV_LINKS.find((link) => link.href === pathname);
+  console.log("activeLink", activeLink);
+
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -55,7 +63,11 @@ export default function Sidebar() {
                   href={link.href}
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
-                  <link.icon className="h-5 w-5" />
+                  <link.icon
+                    className={cn("h-5 w-5", {
+                      "text-primary": activeLink?.href === link.href,
+                    })}
+                  />
                   <span className="sr-only">{link.title}</span>
                 </Link>
               </TooltipTrigger>
