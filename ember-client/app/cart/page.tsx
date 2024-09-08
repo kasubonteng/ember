@@ -19,46 +19,62 @@ const CartItem = ({ item, updateQuantity, removeItem }: CartItemProps) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5 }}
-    className="mb-4 grid grid-cols-1 rounded-xl bg-gray-200 pb-6 md:grid-cols-6 md:pb-0"
+    className="mb-4 overflow-hidden rounded-xl bg-gray-200 shadow-md"
   >
-    <div className="col-span-3 flex flex-col gap-3 p-4 md:flex-row">
-      <Image
-        src={item.imageUrl}
-        alt={item.name}
-        width={200}
-        height={200}
-        objectFit="cover"
-        className="w-full rounded-lg md:w-auto"
-      />
-      <div className="my-auto">
-        <p className="text-lg font-bold md:text-xl">{item.name}</p>
+    <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-6 md:items-center">
+      <div className="col-span-1 sm:col-span-2 md:col-span-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="relative h-40 w-full overflow-hidden rounded-lg sm:h-32 sm:w-32">
+            <Image
+              src={item.imageUrl}
+              alt={item.name}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center">
+            <p className="text-lg font-bold md:text-xl">{item.name}</p>
+            <p className="text-sm text-gray-600 md:hidden">
+              {formatCurrency(item.price)}
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div className="flex items-center justify-center font-medium">
-      <p>{formatCurrency(item.price)}</p>
-    </div>
-    <div className="flex items-center justify-center">
-      <button
-        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-        className="p-1"
-      >
-        <Minus size={20} />
-      </button>
-      <span className="mx-2">{item.quantity}</span>
-      <button
-        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-        className="p-1"
-      >
-        <Plus size={20} />
-      </button>
-    </div>
-    <div className="flex items-center justify-center">
-      <p className="text-lg font-bold text-primary md:text-xl">
-        {formatCurrency(item.price * item.quantity)}
-      </p>
-      <button onClick={() => removeItem(item)} className="ml-4 text-red-500">
-        <Trash2 size={20} />
-      </button>
+
+      <div className="hidden items-center justify-center font-medium md:flex">
+        <p>{formatCurrency(item.price)}</p>
+      </div>
+
+      <div className="flex items-center justify-start sm:justify-center">
+        <button
+          onClick={() => updateQuantity(item.id, -1)}
+          className="rounded-full bg-gray-300 p-1 hover:bg-gray-400"
+          aria-label="Decrease quantity"
+        >
+          <Minus size={16} />
+        </button>
+        <span className="mx-2 min-w-[20px] text-center">{item.quantity}</span>
+        <button
+          onClick={() => updateQuantity(item.id, 1)}
+          className="rounded-full bg-gray-300 p-1 hover:bg-gray-400"
+          aria-label="Increase quantity"
+        >
+          <Plus size={16} />
+        </button>
+      </div>
+
+      <div className="flex items-center justify-between sm:justify-center">
+        <p className="text-lg font-bold text-primary md:text-xl">
+          {formatCurrency(item.price * item.quantity)}
+        </p>
+        <button
+          onClick={() => removeItem(item)}
+          className="ml-4 rounded-full bg-red-100 p-2 text-primary hover:bg-red-200"
+          aria-label="Remove item"
+        >
+          <Trash2 size={16} />
+        </button>
+      </div>
     </div>
   </motion.div>
 );

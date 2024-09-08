@@ -67,7 +67,7 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
               onHoverStart={() => setIsHovered(true)}
               onHoverEnd={() => setIsHovered(false)}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              onClick={() => addToCart({ ...product, quantity: 1 })}
+              onClick={() => addToCart(product, 1)}
             >
               <motion.span
                 className="absolute flex items-center justify-center"

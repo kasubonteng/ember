@@ -19,7 +19,7 @@ const Navbar = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const cartTotalItems = useCartStore((state) => state.getTotalItems);
+  const cartTotalItems = useCartStore((state) => state.totalItems);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,9 +111,9 @@ const Navbar = () => {
             href="/cart"
             className="relative transition-colors duration-150 hover:text-primary"
           >
-            {cartTotalItems() > 0 && (
+            {cartTotalItems > 0 && (
               <span className="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold text-white">
-                {cartTotalItems()}
+                {cartTotalItems}
               </span>
             )}
             <ShoppingBag className="size-[34px]" />
