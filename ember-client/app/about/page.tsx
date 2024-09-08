@@ -299,21 +299,21 @@ const MissionSection = () => {
           }}
           className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          <div className="rounded-lg bg-white p-6 shadow-md">
+          <div className="flex h-full flex-col gap-3 rounded-xl border border-primary bg-primary/5 p-6 transition-all duration-300 hover:bg-primary/10 hover:shadow-lg">
             <h3 className="mb-4 text-2xl font-semibold">Innovative Design</h3>
             <p>
               We push the boundaries of furniture design, creating pieces that
               are both beautiful and functional.
             </p>
           </div>
-          <div className="rounded-lg bg-white p-6 shadow-md">
+          <div className="flex h-full flex-col gap-3 rounded-xl border border-primary bg-primary/5 p-6 transition-all duration-300 hover:bg-primary/10 hover:shadow-lg">
             <h3 className="mb-4 text-2xl font-semibold">Sustainability</h3>
             <p>
               We are committed to using eco-friendly materials and processes to
               minimize our environmental impact.
             </p>
           </div>
-          <div className="rounded-lg bg-white p-6 shadow-md">
+          <div className="flex h-full flex-col gap-3 rounded-xl border border-primary bg-primary/5 p-6 transition-all duration-300 hover:bg-primary/10 hover:shadow-lg">
             <h3 className="mb-4 text-2xl font-semibold">
               Customer Satisfaction
             </h3>
@@ -338,22 +338,22 @@ const TeamSection = () => {
     {
       name: "Jane Doe",
       role: "Founder & CEO",
-      image: "/about/jane-doe.jpg",
+      image: "/about/jane-doe.webp",
     },
     {
       name: "John Smith",
       role: "Lead Designer",
-      image: "/about/john-smith.jpg",
+      image: "/about/john-smith.webp",
     },
     {
       name: "Emily Brown",
       role: "Head of Operations",
-      image: "/about/emily-brown.jpg",
+      image: "/about/emily-brown.webp",
     },
     {
       name: "Michael Johnson",
       role: "Chief Sustainability Officer",
-      image: "/about/michael-johnson.jpg",
+      image: "/about/michael-johnson.webp",
     },
   ];
 

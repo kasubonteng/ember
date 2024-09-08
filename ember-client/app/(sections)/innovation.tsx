@@ -49,7 +49,7 @@ const Innovation = () => {
           className="relative w-full lg:w-1/2"
         >
           <Image
-            src="/innovation/innovation-1.jpg"
+            src="/innovation/innovation-1.webp"
             width={629}
             height={445}
             alt="innovation image 1"
