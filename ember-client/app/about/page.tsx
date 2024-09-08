@@ -128,7 +128,7 @@ const OurStorySection = () => {
         hidden: { opacity: 0, y: 50 },
       }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-b from-white to-gray-100 px-4 py-20 md:px-8 lg:px-20"
+      className="bg-gradient-to-b from-white to-gray-100 px-4 py-8 md:px-8 md:py-20 lg:px-20"
     >
       <div className="mx-auto max-w-screen-2xl">
         <div className="flex flex-col gap-10 lg:flex-row">
@@ -185,7 +185,7 @@ const ValuesSection = ({
         hidden: { opacity: 0, y: 50 },
       }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-b from-gray-100 to-white px-4 py-20 md:px-8 lg:px-20"
+      className="bg-gradient-to-b from-gray-100 to-white px-4 py-8 md:px-8 md:py-20 lg:px-20"
     >
       <div className="mx-auto max-w-screen-2xl">
         <motion.h2
@@ -268,7 +268,7 @@ const MissionSection = () => {
         hidden: { opacity: 0, y: 50 },
       }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-b from-white to-gray-100 px-4 py-20 md:px-8 lg:px-20"
+      className="bg-gradient-to-b from-white to-gray-100 px-4 py-8 md:px-8 md:py-20 lg:px-20"
     >
       <div className="mx-auto max-w-screen-2xl">
         <motion.h2
@@ -367,7 +367,7 @@ const TeamSection = () => {
         hidden: { opacity: 0, y: 50 },
       }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-b from-gray-100 to-white px-4 py-20 md:px-8 lg:px-20"
+      className="bg-gradient-to-b from-gray-100 to-white px-4 py-8 md:px-8 md:py-20 lg:px-20"
     >
       <div className="mx-auto max-w-screen-2xl">
         <motion.h2
