@@ -12,6 +12,7 @@ import { getShopProducts } from "@/data/get-shop-products";
 import { Product } from "@/types";
 import LoadingProductCard from "@/components/product-loading";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useShopProductsData } from "@/hooks/useShopProductsData";
 
 interface CategoryProps {
   category: string;
@@ -53,14 +54,7 @@ const Category = ({ category, description, products }: CategoryProps) => {
 };
 
 const ShopPage = () => {
-  const {
-    data: categories,
-    isPending,
-    isError,
-  } = useQuery<CategoryProps[], Error>({
-    queryKey: ["products"],
-    queryFn: async () => await getShopProducts(),
-  });
+  const { data: categories, isPending, isError } = useShopProductsData();
 
   if (isError) return <div>Error fetching products. Please refresh page!</div>;
 

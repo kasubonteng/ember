@@ -2,7 +2,6 @@
 
 import CustomLink from "@/components/link";
 import ProductCard from "@/components/product-card-large";
-import getAllProducts from "@/data/get-all-products";
 import { Product } from "@/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
@@ -10,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import Filter from "./_components/filter";
 import LoadingProductCard from "@/components/product-loading";
+import { useAllProductsData } from "@/hooks/useAllProductsData";
 
 interface APIResponse {
   products: Product[];
@@ -30,14 +30,9 @@ const ShopPage = () => {
     return params.toString();
   }, [searchParams, page, pageSize]);
 
-  const { data, isPending, isError, isPlaceholderData } = useQuery<
-    APIResponse,
-    Error
-  >({
-    queryKey: ["products", createQueryString(), page],
-    queryFn: async () => await getAllProducts(createQueryString().toString()),
-    placeholderData: keepPreviousData,
-  });
+  const { data, isPending, isError, isPlaceholderData } = useAllProductsData(
+    createQueryString().toString(),
+  );
 
   if (isError) return <div>Error fetching products. Please refresh page!</div>;
 

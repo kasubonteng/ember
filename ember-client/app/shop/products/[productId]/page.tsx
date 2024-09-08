@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Product } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import { getSingleProduct } from "@/data/get-single-product";
 import { formatCurrency } from "@/lib/utils";
+import { useSingleProductData } from "@/hooks/useSingleProductData";
 
 interface ProductPageProps {
   params: {
@@ -43,10 +43,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
     data: product,
     isPending,
     isError,
-  } = useQuery<APIResponse, Error>({
-    queryKey: ["product", productId],
-    queryFn: async () => getSingleProduct(Number(productId)),
-  });
+  } = useSingleProductData(Number(productId));
 
   const handleAddToCart = () => {
     // Implement add to cart logic here
