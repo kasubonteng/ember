@@ -115,7 +115,7 @@ const ContactInfo = ({
 
 const ContactPage = () => {
   return (
-    <section className="mx-auto flex min-h-screen max-w-screen-2xl flex-col items-center justify-center p-4 pt-8 sm:pt-0 md:flex-row">
+    <section className="mx-auto flex min-h-screen max-w-screen-2xl flex-col items-center justify-center p-4 pt-20 sm:pt-0 md:flex-row">
       <div className="flex h-full w-full flex-col items-start justify-center md:flex-row">
         <motion.div
           initial={{ opacity: 0, x: -50 }}

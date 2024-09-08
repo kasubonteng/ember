@@ -67,7 +67,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
   }
 
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center p-4 pt-10 md:p-8 md:pt-4">
+    <section className="flex min-h-screen flex-col items-center justify-center p-4 pt-20 md:p-8 md:pt-4">
       <div className="w-full max-w-screen-xl">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
