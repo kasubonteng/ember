@@ -1,10 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import CustomLink from "@/components/link";
-import Image from "next/image";
-import { Label } from "@radix-ui/react-label";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -12,12 +9,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { Product } from "@/types";
-import { useQuery } from "@tanstack/react-query";
-import { formatCurrency } from "@/lib/utils";
 import { useSingleProductData } from "@/hooks/useSingleProductData";
+import { formatCurrency } from "@/lib/utils";
+import { Product } from "@/types";
+import { Label } from "@radix-ui/react-label";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import React, { useState } from "react";
+import { toast } from "sonner";
 
 interface ProductPageProps {
   params: {

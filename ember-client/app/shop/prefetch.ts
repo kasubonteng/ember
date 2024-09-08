@@ -1,6 +1,5 @@
 import { getAllProducts } from "@/hooks/useAllProductsData";
-import { getShopProducts } from "@/hooks/useShopProductsData";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 
 export async function prefetchShopData(category?: string) {
   const queryClient = new QueryClient();

@@ -1,9 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 interface CardProps {

@@ -2,14 +2,13 @@
 
 import CustomLink from "@/components/link";
 import ProductCard from "@/components/product-card-large";
+import LoadingProductCard from "@/components/product-loading";
+import { useAllProductsData } from "@/hooks/useAllProductsData";
 import { Product } from "@/types";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import Filter from "./_components/filter";
-import LoadingProductCard from "@/components/product-loading";
-import { useAllProductsData } from "@/hooks/useAllProductsData";
 
 interface APIResponse {
   products: Product[];

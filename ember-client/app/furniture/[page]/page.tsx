@@ -1,5 +1,4 @@
 import CustomLink from "@/components/link";
-import React from "react";
 
 const FurniturePage = () => {
   return (

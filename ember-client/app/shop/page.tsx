@@ -1,18 +1,14 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import { ChevronRight } from "lucide-react";
 import CustomLink from "@/components/link";
 import ProductCardSmall from "@/components/product-card-small";
-import { useQuery } from "@tanstack/react-query";
-import { getShopProducts } from "@/data/get-shop-products";
-import { Product } from "@/types";
 import LoadingProductCard from "@/components/product-loading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useShopProductsData } from "@/hooks/useShopProductsData";
+import { Product } from "@/types";
+import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 interface CategoryProps {
   category: string;

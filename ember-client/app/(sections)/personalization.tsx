@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
+import CustomLink from "@/components/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import CustomLink from "@/components/link";
 
 const Personalization = () => {
   const containerVariants = {

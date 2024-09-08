@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { Plus, Minus, Trash2 } from "lucide-react";
-import useCartStore, { CartItem as ICartItem } from "@/stores/cart";
 import { formatCurrency } from "@/lib/utils";
+import useCartStore, { CartItem as ICartItem } from "@/stores/cart";
+import { AnimatePresence, motion } from "framer-motion";
+import { Minus, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
 
 interface CartItemProps {
   item: ICartItem;

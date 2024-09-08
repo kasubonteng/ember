@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
 import Search from "@/components/search";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (

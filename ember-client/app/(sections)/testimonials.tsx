@@ -7,10 +7,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ChevronUp, Star } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 const testimonials = [
   {

@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import { cn, formatCurrency } from "@/lib/utils";
+import useCartStore from "@/stores/cart";
+import { Product } from "@/types";
 import { motion } from "framer-motion";
+import { Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, ShoppingCart } from "lucide-react";
-import { cn, formatCurrency } from "@/lib/utils";
-import { Product } from "@/types";
-import useCartStore from "@/stores/cart";
+import React, { useState } from "react";
 
 interface ProductCardLargeProps {
   product: Product;

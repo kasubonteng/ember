@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
 import CustomLink from "@/components/link";
+import { motion } from "framer-motion";
 
 const WhyChooseUs = () => {
   const containerVariants = {

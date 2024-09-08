@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { Button } from "./ui/button";
 
 export const tabs = [
   {

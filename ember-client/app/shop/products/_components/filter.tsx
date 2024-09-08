@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
-import { ChevronDown, Star, X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -11,9 +8,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter, useSearchParams } from "next/navigation";
 import { formatCurrency } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, X } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const categories = [
   "All",

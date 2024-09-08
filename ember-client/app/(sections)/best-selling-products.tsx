@@ -1,21 +1,12 @@
 "use client";
 
 import CustomLink from "@/components/link";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ChevronDown,
-  ChevronUp,
-  PlusIcon,
-  StarIcon,
-} from "lucide-react";
-import Image from "next/image";
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import ProductCardLarge from "@/components/product-card-large";
 import TabSwitcher, { tabs } from "@/components/tab-switcher";
+import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 interface Product {
   id: number;
