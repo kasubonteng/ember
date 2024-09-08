@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types";
+import { formatCurrency } from "@/lib/utils";
 
 interface ProductCardSmallProps {
   product: Product;
@@ -36,7 +37,7 @@ const ProductCardSmall: React.FC<ProductCardSmallProps> = ({
           {product.name}
         </p>
         <p className="font-medium text-primary group-hover:font-bold">
-          Ghc{product.price.toLocaleString()}
+          {formatCurrency(product.price)}
         </p>
       </Link>
     </motion.div>

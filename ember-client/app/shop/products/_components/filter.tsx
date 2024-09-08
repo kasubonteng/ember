@@ -13,6 +13,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter, useSearchParams } from "next/navigation";
+import { formatCurrency } from "@/lib/utils";
 
 const categories = [
   "All",
@@ -124,7 +125,9 @@ const Filter = () => {
     if (priceRange[0] !== 0 || priceRange[1] !== 1000) {
       filters.push({
         type: "price",
-        value: `Ghc ${priceRange[0]} - Ghc ${priceRange[1]}`,
+        value: `${formatCurrency(priceRange[0])} - ${formatCurrency(
+          priceRange[1],
+        )}`,
       });
     }
     if (popularity !== "Any") {
@@ -239,8 +242,8 @@ const Filter = () => {
                   className="w-full"
                 />
                 <div className="mt-2 flex justify-between text-sm text-gray-600">
-                  <span>Ghc {priceRange[0]}</span>
-                  <span>Ghc {priceRange[1]}</span>
+                  <span>{formatCurrency(priceRange[0])}</span>
+                  <span>{formatCurrency(priceRange[1])}</span>
                 </div>
               </motion.div>
 

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Plus, Minus, Trash2 } from "lucide-react";
 import useCartStore, { CartItem as ICartItem } from "@/stores/cart";
+import { formatCurrency } from "@/lib/utils";
 
 interface CartItemProps {
   item: ICartItem;
@@ -34,7 +35,7 @@ const CartItem = ({ item, updateQuantity, removeItem }: CartItemProps) => (
       </div>
     </div>
     <div className="flex items-center justify-center font-medium">
-      <p>Ghc {item.price.toFixed(2)}</p>
+      <p>{formatCurrency(item.price)}</p>
     </div>
     <div className="flex items-center justify-center">
       <button
@@ -53,7 +54,7 @@ const CartItem = ({ item, updateQuantity, removeItem }: CartItemProps) => (
     </div>
     <div className="flex items-center justify-center">
       <p className="text-lg font-bold text-primary md:text-xl">
-        Ghc {(item.price * item.quantity).toFixed(2)}
+        {formatCurrency(item.price * item.quantity)}
       </p>
       <button onClick={() => removeItem(item)} className="ml-4 text-red-500">
         <Trash2 size={20} />
@@ -119,7 +120,7 @@ const CartPage = () => {
             <h4 className="text-2xl font-medium md:text-3xl">Cart Total</h4>
             <div className="flex w-full items-center justify-between text-base font-medium md:text-lg">
               <p>Subtotal</p>
-              <p>Ghc {getTotalPrice().toFixed(2)}</p>
+              <p>{formatCurrency(getTotalPrice())}</p>
             </div>
             <motion.button
               whileHover={{ scale: 1.05 }}

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Plus, ShoppingCart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Product } from "@/types";
 import useCartStore from "@/stores/cart";
 
@@ -51,7 +51,7 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
               {product.popularity === "Most Popular" ? "Most Popular" : ""}
             </p> */}
             <p className="font-medium text-primary group-hover:font-bold">
-              Ghc{product.price.toLocaleString()}
+              {formatCurrency(product.price)}
             </p>
           </div>
           <div>

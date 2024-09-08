@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { Product } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { getSingleProduct } from "@/data/get-single-product";
+import { formatCurrency } from "@/lib/utils";
 
 interface ProductPageProps {
   params: {
@@ -138,7 +139,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
           >
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <p className="text-xl font-medium text-primary">
-              Ghc {product.price.toFixed(2)}
+              {formatCurrency(product.price)}
             </p>
             <p className="text-lg">{product.description}</p>
 
