@@ -7,38 +7,42 @@ import { motion } from "framer-motion";
 const services = [
   {
     name: "Interior Design",
-    href: "/interior-design",
+    href: "#",
   },
   {
     name: "Furniture Design",
-    href: "/furniture-design",
+    href: "#",
   },
   {
     name: "Home Decor",
-    href: "/home-decor",
+    href: "#",
   },
   {
     name: "Architecture",
-    href: "/architecture",
+    href: "#",
   },
 ];
-
+//localhost:3002/shop/products?category=featured
 const furniture = [
   {
-    name: "Chair",
-    href: "/chair",
+    name: "Featured",
+    href: "/shop/products?category=featured",
   },
   {
-    name: "Bed",
-    href: "/bed",
+    name: "Bedroom",
+    href: "/shop/products?category=bedroom",
   },
   {
-    name: "Sofa",
-    href: "/sofa",
+    name: "Living Room",
+    href: "/shop/products?category=living-room",
   },
   {
-    name: "Lamp",
-    href: "/lamp",
+    name: "Dining",
+    href: "/shop/products?category=dining",
+  },
+  {
+    name: "Office",
+    href: "/shop/products?category=office",
   },
   {
     name: "All",
