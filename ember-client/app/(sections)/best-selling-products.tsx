@@ -3,225 +3,206 @@
 import CustomLink from "@/components/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight, PlusIcon, StarIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
+  PlusIcon,
+  StarIcon,
+} from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ProductCardLarge from "@/components/product-card-large";
+import TabSwitcher, { tabs } from "@/components/tab-switcher";
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
   price: number;
-  image: string;
-  category: string;
+  imageUrl: string;
+  category: "featured" | "living-room" | "bedroom" | "dining-room" | "office";
   rating: number;
 }
 
 const mockProducts2: {
-  chair: Product[];
-  bed: Product[];
-  sofa: Product[];
-  lamp: Product[];
+  featured: Product[];
+  "living-room": Product[];
+  bedroom: Product[];
+  "dining-room": Product[];
+  office: Product[];
 } = {
-  chair: [
+  featured: [
     {
-      id: "1",
+      id: 1,
       name: "Sakarias Armchair",
       price: 200,
-      image: "/chair1.png",
-      category: "chair",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "featured",
       rating: 4,
     },
     {
-      id: "2",
+      id: 2,
       name: "Sakarias Armchair",
       price: 200,
-      image: "/chair1.png",
-      category: "chair",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "featured",
       rating: 4,
     },
     {
-      id: "3",
+      id: 3,
       name: "Sakarias Armchair",
       price: 200,
-      image: "/chair1.png",
-      category: "chair",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "featured",
       rating: 4,
     },
     {
-      id: "4",
+      id: 4,
       name: "Sakarias Armchair",
       price: 200,
-      image: "/chair1.png",
-      category: "chair",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "featured",
       rating: 4,
     },
   ],
-  bed: [
+  "living-room": [
     {
-      id: "1",
+      id: 5,
       name: "Bed",
       price: 500,
-      image: "/chair2.png",
-      category: "bed",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "living-room",
       rating: 5,
     },
     {
-      id: "2",
+      id: 6,
       name: "Bed",
       price: 500,
-      image: "/chair2.png",
-      category: "bed",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "living-room",
       rating: 5,
     },
     {
-      id: "3",
+      id: 7,
       name: "Bed",
       price: 500,
-      image: "/chair2.png",
-      category: "bed",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "living-room",
       rating: 5,
     },
     {
-      id: "4",
+      id: 8,
       name: "Bed",
       price: 500,
-      image: "/chair2.png",
-      category: "bed",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "living-room",
       rating: 5,
     },
   ],
-  sofa: [
+  "dining-room": [
     {
-      id: "1",
+      id: 9,
       name: "Sofa",
       price: 300,
-      image: "/chair3.png",
-      category: "sofa",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "dining-room",
       rating: 4,
     },
     {
-      id: "2",
+      id: 10,
       name: "Sofa",
       price: 300,
-      image: "/chair3.png",
-      category: "sofa",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "dining-room",
       rating: 4,
     },
     {
-      id: "3",
+      id: 11,
       name: "Sofa",
       price: 300,
-      image: "/chair3.png",
-      category: "sofa",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "dining-room",
       rating: 4,
     },
     {
-      id: "4",
+      id: 12,
       name: "Sofa",
       price: 300,
-      image: "/chair3.png",
-      category: "sofa",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "dining-room",
       rating: 4,
     },
   ],
-  lamp: [
+  bedroom: [
     {
-      id: "1",
+      id: 13,
       name: "Lamp",
       price: 100,
-      image: "/chair4.png",
-      category: "lamp",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "bedroom",
       rating: 3,
     },
     {
-      id: "2",
+      id: 14,
       name: "Lamp",
       price: 100,
-      image: "/chair4.png",
-      category: "lamp",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "bedroom",
       rating: 3,
     },
     {
-      id: "3",
+      id: 15,
       name: "Lamp",
       price: 100,
-      image: "/chair4.png",
-      category: "lamp",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "bedroom",
       rating: 3,
     },
     {
-      id: "4",
+      id: 16,
       name: "Lamp",
       price: 100,
-      image: "/chair4.png",
-      category: "lamp",
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "bedroom",
       rating: 3,
     },
   ],
-};
-
-const ProductCard = ({
-  product: { name, price, image, rating, category },
-}: {
-  product: Product;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-      className="group mx-auto w-full max-w-[270px] rounded-xl shadow-lg hover:cursor-pointer"
-    >
-      <div className="flex w-full items-center justify-center overflow-hidden">
-        <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-          <Image
-            src={image}
-            alt={name}
-            width={240}
-            height={280}
-            className="h-[300px] w-full object-cover"
-          />
-        </motion.div>
-      </div>
-      <motion.div
-        whileHover={{ backgroundColor: "#f0f0f0" }}
-        className="flex flex-col gap-4 rounded-b-xl bg-white px-4 py-3 transition-colors group-hover:text-primary sm:gap-8 sm:px-6 sm:py-4"
-      >
-        <div className="flex flex-col">
-          <p className="text-xs capitalize text-gray-400 group-hover:text-primary sm:text-sm">
-            {category}
-          </p>
-          <p className="text-lg font-bold sm:text-xl">{name}</p>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <StarIcon
-                  key={star}
-                  fill={star <= rating ? "#FFD700" : "none"}
-                  className={cn(
-                    "h-3 w-3 sm:h-4 sm:w-4",
-                    star <= rating ? "text-[#FFD700]" : "text-gray-400",
-                  )}
-                />
-              ))}
-            </div>
-            <p className="text-xs text-gray-400 sm:text-sm">({rating})</p>
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-bold sm:text-base">Ghc{price}</p>
-          <Button
-            size={"icon"}
-            className="h-8 w-8 rounded-full bg-black transition-transform duration-150 hover:rotate-[90deg] sm:h-10 sm:w-10"
-          >
-            <PlusIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-          </Button>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
+  office: [
+    {
+      id: 13,
+      name: "Lamp",
+      price: 100,
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "office",
+      rating: 3,
+    },
+    {
+      id: 14,
+      name: "Lamp",
+      price: 100,
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "office",
+      rating: 3,
+    },
+    {
+      id: 15,
+      name: "Lamp",
+      price: 100,
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "office",
+      rating: 3,
+    },
+    {
+      id: 16,
+      name: "Lamp",
+      price: 100,
+      imageUrl: "/innovation/innovation-1.webp",
+      category: "office",
+      rating: 3,
+    },
+  ],
 };
 
 const BestSellingProducts = () => {
@@ -230,13 +211,15 @@ const BestSellingProducts = () => {
   const getProductsForActiveTab = () => {
     switch (activeTab) {
       case 0:
-        return mockProducts2.chair;
+        return mockProducts2.featured;
       case 1:
-        return mockProducts2.bed;
+        return mockProducts2.bedroom;
       case 2:
-        return mockProducts2.sofa;
+        return mockProducts2["living-room"];
       case 3:
-        return mockProducts2.lamp;
+        return mockProducts2["dining-room"];
+      case 4:
+        return mockProducts2.office;
       default:
         return [];
     }
@@ -287,8 +270,11 @@ const BestSellingProducts = () => {
             transition={{ duration: 0.4 }}
             className="mx-auto grid w-full grid-cols-1 content-center items-center gap-6 justify-self-center sm:grid-cols-2 sm:gap-10 lg:grid-cols-4"
           >
-            {getProductsForActiveTab().map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {getProductsForActiveTab().map((product, index) => (
+              // <ProductCard key={product.id} product={product} />
+              <div className="mx-auto" key={product.id}>
+                <ProductCardLarge index={index} product={product} />
+              </div>
             ))}
           </motion.div>
         </AnimatePresence>
@@ -306,61 +292,3 @@ const BestSellingProducts = () => {
 };
 
 export default BestSellingProducts;
-
-const tabs = [
-  {
-    name: "Chair",
-    value: 0,
-  },
-  {
-    name: "Beds",
-    value: 1,
-  },
-  {
-    name: "Sofa",
-    value: 2,
-  },
-  {
-    name: "Lamp",
-    value: 3,
-  },
-];
-
-const TabSwitcher = ({
-  activeTab,
-  setActiveTab,
-}: {
-  activeTab: number;
-  setActiveTab: React.Dispatch<React.SetStateAction<number>>;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.5 }}
-      className="flex flex-wrap justify-center space-x-2 rounded-full bg-gray-200 p-2 sm:space-x-4"
-    >
-      {tabs.map((tab, index) => {
-        return (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              className={cn(
-                "rounded-full bg-transparent px-3 py-1 text-sm font-medium text-black hover:text-white sm:px-4 sm:py-2 sm:text-lg",
-                tab.value === activeTab
-                  ? "bg-white"
-                  : "bg-transparent text-black",
-              )}
-              onClick={() => setActiveTab(tab.value)}
-            >
-              {tab.name}
-            </Button>
-          </motion.div>
-        );
-      })}
-    </motion.div>
-  );
-};

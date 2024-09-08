@@ -28,11 +28,11 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400 }}
     >
-      <Link
-        href={`/shop/products/${product.id}`}
-        className="group flex w-80 flex-col gap-2 sm:w-64"
-      >
-        <div className="relative size-80 overflow-hidden rounded-xl sm:h-64 sm:w-64">
+      <div className="group flex w-80 flex-col gap-2 sm:w-64">
+        <Link
+          href={`/shop/products/${product.id}`}
+          className="relative size-80 overflow-hidden rounded-xl sm:h-64 sm:w-64"
+        >
           <Image
             src={product.imageUrl}
             width={256}
@@ -40,9 +40,9 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
             alt={`${product.name} image`}
             className="size-[320px] object-cover transition-transform duration-300 hover:scale-110 sm:size-[256px]"
           />
-        </div>
+        </Link>
         <div className="flex items-center justify-between">
-          <div className="">
+          <Link href={`/shop/products/${product.id}`} className="">
             <p className="text-lg font-medium group-hover:font-bold">
               {product.name}
             </p>
@@ -53,7 +53,7 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
             <p className="font-medium text-primary group-hover:font-bold">
               {formatCurrency(product.price)}
             </p>
-          </div>
+          </Link>
           <div>
             <motion.button
               className={cn(
@@ -89,7 +89,7 @@ const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
             </motion.button>
           </div>
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 };
