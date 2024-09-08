@@ -394,8 +394,8 @@ const TeamSection = () => {
                 src={member.image}
                 alt={member.name}
                 width={200}
-                height={200}
-                className="mb-4 rounded-full"
+                height={300}
+                className="mb-4 h-[300px] w-[200px] rounded-full"
               />
               <h3 className="text-xl font-semibold">{member.name}</h3>
               <p className="text-gray-600">{member.role}</p>
