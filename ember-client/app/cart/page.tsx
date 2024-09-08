@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/utils";
-import useCartStore, { CartItem as ICartItem } from "@/stores/cart";
+import { CartItem as ICartItem, useCartStore } from "@/stores/cart";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { useSingleProductData } from "@/hooks/useSingleProductData";
 import { formatCurrency } from "@/lib/utils";
+import { useCartStore } from "@/stores/cart";
 import { Product } from "@/types";
 import { Label } from "@radix-ui/react-label";
 import { AnimatePresence, motion } from "framer-motion";
@@ -25,7 +26,6 @@ interface ProductPageProps {
 }
 
 interface APIResponse extends Product {
-  // Description of the product.
   description: string;
   imageUrls: {
     imageUrl: string;
@@ -35,6 +35,7 @@ interface APIResponse extends Product {
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
+  const { addToCart } = useCartStore();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState("1");
 
@@ -44,9 +45,9 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
     isError,
   } = useSingleProductData(Number(productId));
 
-  const handleAddToCart = () => {
-    // Implement add to cart logic here
-    toast.success(`${quantity} ${product?.name} added to cart`);
+  const handleAddToCart = (quantityToAdd: number, productToAdd: Product) => {
+    addToCart(productToAdd, quantityToAdd);
+    toast.success(`${quantityToAdd} ${product?.name} added to cart`);
   };
 
   if (isPending) {
@@ -157,7 +158,20 @@ const ProductPage: React.FC<ProductPageProps> = ({ params: { productId } }) => {
               </Select>
             </div>
 
-            <Button className="mt-4 w-full" onClick={handleAddToCart} size="lg">
+            <Button
+              className="mt-4 w-full"
+              onClick={() =>
+                handleAddToCart(Number(quantity), {
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  imageUrl: product.imageUrls[0].imageUrl,
+                  rating: product.rating,
+                  category: product.category,
+                })
+              }
+              size="lg"
+            >
               Add to Cart
             </Button>
           </motion.div>

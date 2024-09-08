@@ -1,7 +1,7 @@
 "use client";
 
 import { cn, formatCurrency } from "@/lib/utils";
-import useCartStore from "@/stores/cart";
+import { useCartStore } from "@/stores/cart";
 import { Product } from "@/types";
 import { motion } from "framer-motion";
 import { Plus, ShoppingCart } from "lucide-react";

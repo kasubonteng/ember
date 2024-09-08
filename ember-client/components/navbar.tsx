@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import useCartStore from "@/stores/cart";
+import { useCartStore } from "@/stores/cart";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import Link from "next/link";

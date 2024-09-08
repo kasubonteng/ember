@@ -16,7 +16,7 @@ interface CartState {
   getTotalPrice: () => number;
 }
 
-const useCartStore = create<CartState>()(
+export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
@@ -77,5 +77,3 @@ const useCartStore = create<CartState>()(
     },
   ),
 );
-
-export default useCartStore;
