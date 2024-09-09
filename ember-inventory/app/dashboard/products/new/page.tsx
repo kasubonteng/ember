@@ -9,11 +9,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import ProductCategory from "../_components/product-category";
-import ProductDetails from "../_components/product-details";
-import ProductImages from "../_components/product-images";
-import ProductStatus from "../_components/product-status";
-import Stock from "../_components/stock";
+import ProductDetails from "../[productId]/_components/product-details";
+import Stock from "../[productId]/_components/stock";
+import ProductCategory from "../[productId]/_components/product-category";
+import ProductStatus from "../[productId]/_components/product-status";
+import ProductImages from "../[productId]/_components/product-images";
 
 export interface Product {
   id: string;
@@ -29,29 +29,6 @@ export interface Product {
     alt: string;
   }[];
 }
-
-const productDetails: Product = {
-  id: "1",
-  name: "Gamer Gear Pro Controller",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.",
-  stock: 101,
-  price: 49.99,
-  category: "electronics",
-  status: "active",
-  images: [
-    {
-      id: "1",
-      src: "/innovation.webp",
-      alt: "Gamer Gear Pro Controller",
-    },
-    {
-      id: "2",
-      src: "/innovation.webp",
-      alt: "Gamer Gear Pro Controller",
-    },
-  ],
-};
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -71,16 +48,26 @@ const formSchema = z.object({
     .min(1, "At least one image is required"),
 });
 
-export default function EditProductPage() {
+export default function NewProductPage() {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: productDetails,
+    defaultValues: {
+      name: "",
+      description: "",
+      stock: 0,
+      price: 0,
+      category: "",
+      status: "draft",
+      images: [],
+    },
   });
 
   function handleSubmit(data: z.infer<typeof formSchema>) {
     console.log(data);
+
+    // router.push("/dashboard/products");
   }
 
   return (
@@ -98,7 +85,7 @@ export default function EditProductPage() {
               </Link>
             </Button>
             <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-              {form.watch("name")}
+              New Product
             </h1>
             <Badge variant="outline" className="ml-auto sm:ml-0">
               {form.watch("stock") > 0 ? "In Stock" : "Out of Stock"}
@@ -113,7 +100,7 @@ export default function EditProductPage() {
                 Discard
               </Button>
               <Button type="submit" size="sm">
-                Save Product
+                Create Product
               </Button>
             </div>
           </div>
@@ -134,7 +121,7 @@ export default function EditProductPage() {
               Discard
             </Button>
             <Button type="submit" size="sm">
-              Save Product
+              Create Product
             </Button>
           </div>
         </div>

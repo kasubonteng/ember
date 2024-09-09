@@ -51,13 +51,19 @@ const Stock = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel
-                          htmlFor={`stock-${field}`}
+                          htmlFor={`stock-${field.name}`}
                           className="sr-only"
                         >
                           Stock
                         </FormLabel>
                         <FormControl>
-                          <Input {...field} />
+                          <Input
+                            {...field}
+                            type="number"
+                            onChange={(e) =>
+                              field.onChange(Number(e.target.value))
+                            }
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -71,13 +77,19 @@ const Stock = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel
-                          htmlFor={`price-${field}`}
+                          htmlFor={`price-${field.name}`}
                           className="sr-only"
                         >
                           Price
                         </FormLabel>
                         <FormControl>
-                          <Input {...field} />
+                          <Input
+                            {...field}
+                            type="number"
+                            onChange={(e) =>
+                              field.onChange(Number(e.target.value))
+                            }
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
