@@ -1,13 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination:
-          "http://emberdevelopment.eba-yrmbfm2p.eu-west-2.elasticbeanstalk.com/api/:path*",
-      },
-    ];
+    if (process.env.NODE_ENV === 'production') {
+      return [
+        {
+          source: "/api/:path*",
+          destination:
+            "http://emberdevelopment.eba-yrmbfm2p.eu-west-2.elasticbeanstalk.com/api/:path*",
+        },
+      ];
+    } else {
+      return [
+        {
+          source: "/api/:path*",
+          destination: "http://localhost:5081/api/:path*",
+        },
+      ];
+    }
   },
   images: {
     remotePatterns: [

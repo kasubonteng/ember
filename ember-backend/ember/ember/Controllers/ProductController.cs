@@ -27,15 +27,12 @@ public class ProductController : ControllerBase
             var (products, totalNumberOfPages) = await _productService.GetAllProductsAsync(queryParams);
 
             var productDtos = products.ToList();
-            return productDtos.Any() ? Ok(new
+            return Ok(new
             {
                 products = productDtos,
                 page = queryParams.Page,
                 pageSize = queryParams.PageSize,
                 totalPages = totalNumberOfPages
-            }) : NotFound(new
-            {
-                message = "No products found"
             });
         }
         catch (Exception e)

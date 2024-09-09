@@ -4,7 +4,7 @@ namespace ember.Repositories.Product;
 
 public interface IProductRepository
 {
-        Task<IEnumerable<Models.Product>> GetAllProductsAsync(ProductQueryParams queryParams);
+        Task<(IEnumerable<Models.Product>, int)> GetAllProductsAsync(ProductQueryParams queryParams);
         Task<Models.Product?> GetProductByIdAsync(int id);
         Task<List<ShopProductDto>> GetProductsByCategoryAsync();
         Task<int> GetTotalNumberOfProductsAsync();

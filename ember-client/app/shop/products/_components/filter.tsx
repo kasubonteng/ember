@@ -12,7 +12,8 @@ import { formatCurrency } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import debounce from "lodash/debounce";
 
 const categories = [
   "All",
@@ -59,7 +60,7 @@ const Filter = () => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Function to update URL based on filter values
-  const updateURL = () => {
+  const updateURL = useCallback(() => {
     // Prevent updating URL on initial render
     if (!isInitialized) return;
 
@@ -75,7 +76,18 @@ const Filter = () => {
     if (searchTerm) params.set("search", searchTerm.toLowerCase());
 
     router.push(`/shop/products?${params.toString()}`, { scroll: false });
-  };
+  }, [
+    isInitialized,
+    selectedCategory,
+    priceRange,
+    popularity,
+    rating,
+    searchTerm,
+    router,
+  ]);
+
+  // Debounced version of updateURL
+  const debouncedUpdateURL = useCallback(debounce(updateURL, 300), [updateURL]);
 
   // Initialize component
   useEffect(() => {
@@ -83,22 +95,23 @@ const Filter = () => {
   }, []);
 
   // Update URL on filter change
-  useEffect(
-    () => {
-      if (isInitialized) {
-        updateURL();
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      selectedCategory,
-      priceRange,
-      popularity,
-      rating,
-      searchTerm,
-      isInitialized,
-    ],
-  );
+  useEffect(() => {
+    if (isInitialized) {
+      debouncedUpdateURL();
+    }
+    // Cleanup function to cancel any pending debounced calls
+    return () => {
+      debouncedUpdateURL.cancel();
+    };
+  }, [
+    selectedCategory,
+    priceRange,
+    popularity,
+    rating,
+    searchTerm,
+    isInitialized,
+    debouncedUpdateURL,
+  ]);
 
   // Animation variants
   const filterContainerVariants = {

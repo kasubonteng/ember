@@ -16,11 +16,11 @@ public class ProductRepository : IProductRepository
     }
 
 
-    public async Task<IEnumerable<Models.Product>> GetAllProductsAsync(ProductQueryParams queryParams)
+    public async Task<(IEnumerable<Models.Product>, int)> GetAllProductsAsync(ProductQueryParams queryParams)
     {
         try
         {
-            var query =  _context.Products
+            var query = _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Images)
                 .Include(p => p.Ratings)
@@ -30,27 +30,27 @@ public class ProductRepository : IProductRepository
             {
                 query = query.Where(p => p.Category.Name.ToLower() == queryParams.Category.ToLower());
             }
-            
+
             if (queryParams.Search != null)
             {
                 query = query.Where(p => p.Name.ToLower().Contains(queryParams.Search.ToLower()));
             }
-            
+
             if (queryParams.Rating != null)
             {
                 query = query.Where(p => p.Ratings.Average(r => r.Value) >= queryParams.Rating);
             }
-            
+
             if (queryParams.MinPrice != null)
             {
                 query = query.Where(p => p.Price >= queryParams.MinPrice);
             }
-            
+
             if (queryParams.MaxPrice != null)
             {
                 query = query.Where(p => p.Price <= queryParams.MaxPrice);
             }
-            
+
             if (queryParams.Sort != null)
             {
                 var sortOption = queryParams.Sort.ToLower();
@@ -65,14 +65,17 @@ public class ProductRepository : IProductRepository
                     _ => query,
                 };
             }
-            
+
+            var totalCount = await query.CountAsync();
+
             if (queryParams.Page.HasValue && queryParams.PageSize.HasValue)
             {
                 query = query.Skip((queryParams.Page.Value - 1) * queryParams.PageSize.Value)
                     .Take(queryParams.PageSize.Value);
             }
 
-            return await query.ToListAsync();
+            var products = await query.ToListAsync();
+            return (products, totalCount);
         }
         catch (Exception e)
         {

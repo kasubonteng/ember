@@ -57,14 +57,24 @@ const ShopPage = () => {
         <Filter />
       </div>
 
-      <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {isPending
-          ? Array.from({ length: pageSize }, (_, i) => (
-              <LoadingProductCard key={i} index={i} />
-            ))
-          : data?.products.map((product, index) => (
-              <ProductCard key={product.name} index={index} product={product} />
-            ))}
+      <div className="grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+        {isPending ? (
+          Array.from({ length: pageSize }, (_, i) => (
+            <LoadingProductCard key={i} index={i} />
+          ))
+        ) : data?.products.length ? (
+          data?.products.map((product, index) => (
+            <ProductCard
+              key={`${product.name}-${index}`}
+              index={index}
+              product={product}
+            />
+          ))
+        ) : (
+          <div className="flex w-full items-center justify-center">
+            <p className="text-2xl font-bold">No products found</p>
+          </div>
+        )}
       </div>
 
       {data?.totalPages && data?.totalPages > 1 && (
